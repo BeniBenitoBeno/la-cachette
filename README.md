@@ -4,8 +4,8 @@ Sept pages statiques, une feuille de style commune. Aucune dépendance, aucun
 build, aucun framework.
 
 ```
-index.html          les trois maisons, en bandes horizontales
-index-colonnes.html la même page, en trois colonnes verticales (variante à comparer)
+index.html          les trois maisons, en trois colonnes
+index-bandes.html   la même page en bandes horizontales (ancienne version, gardée)
 grimaud.html        01 — Golfe de Saint-Tropez   (complète, 41 photos)
 ile-maurice.html    02 — Océan Indien            (complète)
 vars.html           03 — Hautes-Alpes            (complète, 37 photos)

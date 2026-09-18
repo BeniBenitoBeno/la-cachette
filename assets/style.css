@@ -154,7 +154,7 @@ img{max-width:100%}
   .maison{height:46svh; min-height:280px}
 }
 
-/* variante : trois colonnes côte à côte (index-colonnes.html) */
+/* variante : trois colonnes côte à côte (index.html) */
 .maisons.colonnes{flex-direction:row}
 .colonnes .maison{border-bottom:0; border-right:1px solid var(--trait)}
 .colonnes .maison:last-child{border-right:0}
