@@ -88,6 +88,43 @@ grand écran, les photos sont donc agrandies d'un facteur 1,3 à 1,8.
 Pour un rendu net sur grand écran, il faudrait les fichiers d'origine du
 photographe en 2 400 px ou plus.
 
+## Les dates prises sur les plateformes (iCal)
+
+Chaque annonce Airbnb / Booking / Abritel exporte un lien `.ics`. On les
+colle dans `calendriers.json` :
+
+```json
+"maurice": [
+  {"source": "airbnb",  "url": "https://www.airbnb.fr/calendar/ical/….ics"},
+  {"source": "booking", "url": "https://ical.booking.com/v1/export?t=…"}
+]
+```
+
+Où les trouver : Airbnb → *Calendrier → Disponibilités → Synchronisation des
+calendriers → Exporter* ; Booking → *Extranet → Tarifs et disponibilités →
+Synchroniser les calendriers → Exporter* ; Abritel/Vrbo → *Calendrier →
+Importer/Exporter*.
+
+`tools/synchroniser_calendriers.py` lit ces flux (aucune dépendance), fusionne
+les périodes prises et écrit `disponibilites/<maison>.json`. GitHub Actions le
+lance **toutes les 30 minutes** (`.github/workflows/calendriers.yml`) et ne
+commit que si les dates ont changé ; on peut aussi le lancer à la main depuis
+l'onglet *Actions* (« Run workflow »), ou en local.
+
+Le calendrier de chaque page maison lit ce fichier : les nuits prises sont
+hachurées et barrées, on ne peut ni arriver dessus ni les enjamber. Le jour
+du départ d'un autre client reste libre pour une arrivée, comme partout.
+
+Limites de l'iCal : délai (les plateformes publient leurs `.ics` avec un
+peu de retard, et nous relisons toutes les 30 min), et dates seulement — pas
+de nom de client ni de prix. Les liens `.ics` sont secrets : qui les a voit
+les dates prises. Ils sont dans un dépôt public, c'est le compromis assumé ;
+si ça gêne, les passer en *secrets* GitHub Actions.
+
+**Sens inverse** (bloquer Airbnb depuis une résa directe) : il faudrait que le
+site produise son propre `.ics`, donc une base des résas directes — ça
+n'existe pas tant que le formulaire part par courriel.
+
 ## Le sommaire d'une page maison
 
 Une colonne fixe à droite, au milieu de l'écran, qui apparaît une fois le héros

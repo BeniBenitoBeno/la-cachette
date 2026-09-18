@@ -1,0 +1,26 @@
+name: Calendriers des plateformes
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"      # toutes les 30 minutes
+  workflow_dispatch:            # et à la main, bouton « Run workflow »
+
+permissions:
+  contents: write
+
+jobs:
+  synchroniser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Lire les flux iCal
+        run: python tools/synchroniser_calendriers.py
+      - name: Publier si les dates ont changé
+        run: |
+          git config user.name  "calendriers"
+          git config user.email "calendriers@users.noreply.github.com"
+          git add disponibilites
+          git diff --cached --quiet && echo "rien de nouveau" || git commit -m "Calendriers : mise à jour des dates prises" && git push

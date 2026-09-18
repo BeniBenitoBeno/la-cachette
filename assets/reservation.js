@@ -10,6 +10,35 @@
   var form = document.getElementById('demande');
   if (!form) return;
   var MAISON = form.dataset.maison;        // « Île Maurice », « Grimaud — … »
+  var CLE = form.dataset.cle;              // maurice / grimaud / vars
+
+  /* Dates déjà prises sur les plateformes (Airbnb, Booking…), lues dans
+     disponibilites/<cle>.json, produit par tools/synchroniser_calendriers.py.
+     Une nuit « prise » ne peut pas être une nuit du séjour ; le jour de
+     départ d'un autre client reste libre pour une arrivée. */
+  var nuitsPrises = {};
+  function nuitPrise(d) { return !!nuitsPrises[cle(d)]; }
+  function sejourLibre(d1, d2) {
+    for (var x = new Date(d1); x < d2; x.setDate(x.getDate() + 1)) {
+      if (nuitPrise(x)) return false;
+    }
+    return true;
+  }
+  function chargerDisponibilites() {
+    if (!CLE || !window.fetch) return;
+    fetch('disponibilites/' + CLE + '.json', { cache: 'no-cache' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (donnees) {
+        if (!donnees || !donnees.pris) return;
+        donnees.pris.forEach(function (p) {
+          for (var x = duJour(p.de), fin = duJour(p.a); x < fin; x.setDate(x.getDate() + 1)) {
+            nuitsPrises[cle(x)] = true;
+          }
+        });
+        construire();
+      })
+      .catch(function () { /* pas de fichier : tout reste libre */ });
+  }
   var ADRESSE = window.ADRESSE || '';
   var POINT_DE_COLLECTE = window.POINT_DE_COLLECTE || '';
   var boiteErreurs = document.getElementById('erreurs');
@@ -239,6 +268,11 @@
       bt.setAttribute('aria-label', jourLong.format(d));
       bt.tabIndex = -1;
       if (d < aujourdhui) bt.disabled = true;
+      if (nuitPrise(d)) {
+        casier.classList.add('pris');
+        /* on peut encore y poser un départ : le bouton reste cliquable */
+        bt.setAttribute('aria-label', jourLong.format(d) + ' — déjà réservé');
+      }
       casier.appendChild(bt);
       grille.appendChild(casier);
     }
@@ -319,8 +353,13 @@
     var bt = e.target.closest('button[data-jour]');
     if (!bt || bt.disabled) return;
     var d = duJour(bt.dataset.jour);
-    if (!debut || fin || d <= debut) { debut = d; fin = null; }
-    else { fin = d; }
+    if (!debut || fin || d <= debut) {
+      if (nuitPrise(d)) { calEtat.textContent = 'Cette date est déjà réservée.'; return; }
+      debut = d; fin = null;
+    } else if (!sejourLibre(debut, d)) {
+      calEtat.textContent = 'Ces dates chevauchent un séjour déjà réservé. Choisissez un départ plus tôt.';
+      return;
+    } else { fin = d; }
     focusJour = d;
     survol = null;
     synchroniser();
@@ -396,5 +435,6 @@
 
   compteurs();
   construire();
+  chargerDisponibilites();
   rafraichir();
 })();

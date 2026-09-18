@@ -1,0 +1,14 @@
+{
+  "maurice": [
+    {"source": "airbnb",  "url": ""},
+    {"source": "booking", "url": ""}
+  ],
+  "grimaud": [
+    {"source": "airbnb",  "url": ""},
+    {"source": "booking", "url": ""}
+  ],
+  "vars": [
+    {"source": "airbnb",  "url": ""},
+    {"source": "booking", "url": ""}
+  ]
+}

@@ -261,7 +261,8 @@ def main():
         f'content="{e(m["description"])}"')
     assert e(m["description"]) in tete
 
-    queue = queue.replace('data-maison="Île Maurice"', f'data-maison="{e(m["valeur"])}"')
+    queue = queue.replace('data-cle="maurice" data-maison="Île Maurice"',
+                          f'data-cle="{maison}" data-maison="{e(m["valeur"])}"')
     queue = queue.replace('name="maison" value="Île Maurice"', f'name="maison" value="{e(m["valeur"])}"')
     queue = queue.replace('fiche__embleme f-maurice', f'fiche__embleme f-{maison}')
     queue = queue.replace('<h2>Île Maurice</h2>', f'<h2>{e(m["nom"])}</h2>')
