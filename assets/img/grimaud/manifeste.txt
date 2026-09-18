@@ -1,0 +1,41 @@
+canape-exterieur	Canapé extérieur	1448x1086
+chambre-1-vers-la-mer	Chambre 1 vers la mer	1448x1086
+chambre-1-vers-le-mur	Chambre 1 vers le mur	1448x1086
+chambre-2-depuis-la-salle-de-bains	Chambre 2 depuis la salle de bains	1448x1086
+chambre-2-vers-la-mer	Chambre 2 vers la mer	1448x1086
+chambre-2-vers-le-lit	Chambre 2 vers le lit	1448x1086
+chambre-2-vers-sdb	Chambre 2 vers salle de bains	1448x1086
+chambre-nuit	Chambre nuit	1400x1866
+jaccuzzi-et-mer	Jaccuzzi et mer	1448x1086
+maison-depuis-la-piscine	Maison depuis la piscine	1448x1086
+piscine-et-mer-1	Piscine et mer 1	1448x1086
+piscine-et-mer-2	Piscine et mer 2	1448x1086
+piscine-jardin	Piscine jardin	1400x1866
+plage	Plage	1448x1086
+salle-a-manger-1	Salle à manger 1	1403x1219
+table-a-manger-interieure-2	Table à manger intérieure 2	1448x1086
+table-a-manger-interieure	Table à manger intérieure	1448x1086
+vue-de-la-maison-depuis-la-terrasse-du-jaccuzzi	Vue de la maison depuis la terrasse du jaccuzzi	1440x1080
+vue-de-la-maison-depuis-le-lit-balinais	Vue de la maison depuis le lit balinais	1448x1086
+vue-jardin-depuis-la-terrasse-ch2	Vue jardin depuis la terrasse ch2	1448x1086
+vue-mer-depuis-table-pierre	Vue mer depuis table pierre	1448x1086
+chambre-3-vue-mer	Chambre 3 vue mer	1448x1086
+chambre-4	Chambre 4	1448x1086
+couloir	Couloir	1448x1086
+cuisine-2	Cuisine 2	1448x1086
+cuisine	Cuisine	1448x1086
+mer-depuis-le-canape-ext	Mer depuis le canapé extérieure	1448x1086
+poissons	Poissons	1448x1086
+salle-a-manger-exterieure-2	Salle à manger exterieure 2	1448x1086
+salle-a-manger-exterieure-3	Salle à manger exterieure 3	1448x1086
+salle-a-manger-exterieure-4	Salle à manger exterieure 4	1440x1080
+salle-a-manger-exterieure-5	Salle à manger exterieure 5	1448x1086
+salle-a-manger-exterieure	Salle à manger exterieure	1448x1086
+salon-et-sejour	Salon et sejour	1448x1086
+sdb-1-vue-douche	Salle de bains 1 vue douche	1448x1086
+sdb-1-vue-mer	Salle de bains 1 vue mer	1448x1086
+sdb-3	Salle de bains 3	1448x1086
+sdb-4	Salle de bains 4	1086x1448
+sdb5	Sdb5	1448x1086
+tennis	Tennis	1448x1086
+terrasse-des-chambres-3-et-4	Terrasse des chambres 3 et 4	1448x1086

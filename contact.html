@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Nous écrire — La Cachette</title>
+<meta name="description" content="Écrire à La Cachette. Les demandes de séjour se font sur la page de chaque maison.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=1789736320">
+</head>
+<body>
+
+<header class="entete">
+  <a class="marque" href="index.html">La&nbsp;Cachette</a>
+  <nav class="nav">
+    <a href="index.html">Les maisons</a>
+    <a href="esprit.html">L'esprit</a>
+    <a href="sejours.html">Séjours</a>
+    <a href="contact.html" aria-current="page">Contact</a>
+  </nav>
+</header>
+
+<main class="contact" id="contact">
+
+  <div class="demande__titre">
+    <p class="surtitre">Nous écrire</p>
+    <h1>Une question ?</h1>
+    <p>Pour une demande de séjour avec vos dates, passez par la page de la
+    maison : le calendrier y est. Pour tout le reste, écrivez-nous ici.</p>
+  </div>
+
+  <div>
+    <div class="erreurs" id="erreurs" hidden>
+      <strong>Il manque encore quelque chose :</strong>
+      <ul id="liste-erreurs"></ul>
+    </div>
+
+    <form id="question" novalidate>
+      <fieldset class="champs">
+        <legend>Vous</legend>
+        <div class="duo">
+          <label class="champ">
+            <span>Nom et prénom</span>
+            <input type="text" id="nom" name="nom" autocomplete="name" placeholder="Camille Lartigue">
+          </label>
+          <label class="champ">
+            <span>Courriel</span>
+            <input type="email" id="courriel" name="courriel" autocomplete="email" placeholder="camille@exemple.fr">
+          </label>
+        </div>
+        <label class="champ">
+          <span>Téléphone <em style="font-style:normal;opacity:.6">— facultatif</em></span>
+          <input type="tel" id="telephone" name="telephone" autocomplete="tel" placeholder="+33 6 00 00 00 00">
+        </label>
+        <label class="champ">
+          <span>Votre message</span>
+          <textarea id="message" name="message" placeholder="Une question sur une maison, un projet, un partenariat…"></textarea>
+        </label>
+      </fieldset>
+
+      <button class="envoyer" type="submit">Envoyer</button>
+    </form>
+  </div>
+
+  <aside class="fiche" aria-label="Demander un séjour">
+    <div class="fiche__embleme vide" aria-hidden="true"></div>
+    <h2>Un séjour ?</h2>
+    <p class="fiche__note" style="margin:0 0 1.4em;text-align:center">Chaque maison a son
+    calendrier. Choisissez la vôtre, posez vos dates.</p>
+    <dl class="fiche__maisons">
+      <div><dt>01</dt><dd><a href="grimaud.html#reserver">Grimaud</a></dd></div>
+      <div><dt>02</dt><dd><a href="ile-maurice.html#reserver">Île Maurice</a></dd></div>
+      <div><dt>03</dt><dd><a href="vars.html#reserver">Vars</a></dd></div>
+    </dl>
+  </aside>
+
+</main>
+
+<footer class="pied">
+  <nav class="pied__maisons">
+    <a href="grimaud.html">Grimaud</a>
+    <a href="ile-maurice.html">Île Maurice</a>
+    <a href="vars.html">Vars</a>
+  </nav>
+  <div class="pied__bas">
+    <span>La Cachette</span>
+    <span><a href="index.html">Les trois maisons</a></span>
+    <span><a href="contact.html">Nous écrire</a></span>
+  </div>
+</footer>
+
+<script src="assets/config.js"></script>
+<script>
+(function () {
+  var form = document.getElementById('question');
+  var boiteErreurs = document.getElementById('erreurs');
+  var listeErreurs = document.getElementById('liste-erreurs');
+  var ADRESSE = window.ADRESSE || '';
+  var POINT_DE_COLLECTE = window.POINT_DE_COLLECTE || '';
+
+  function verifier() {
+    var manques = [];
+    if (!document.getElementById('nom').value.trim()) manques.push('votre nom');
+    var courriel = document.getElementById('courriel');
+    if (!courriel.value.trim() || !/^[^@\s]+@[^@\s.]+\.[^@\s]+$/.test(courriel.value.trim())) {
+      manques.push('un courriel valide');
+    }
+    if (!document.getElementById('message').value.trim()) manques.push('votre message');
+    return manques;
+  }
+
+  function texte() {
+    var d = new FormData(form);
+    var lignes = ['Nom         : ' + d.get('nom'), 'Courriel    : ' + d.get('courriel')];
+    if (d.get('telephone').trim()) lignes.push('Téléphone   : ' + d.get('telephone'));
+    lignes.push('', d.get('message').trim());
+    return lignes.join('\n');
+  }
+
+  function confirmer() {
+    var corps = texte();
+    var objet = 'Message — La Cachette';
+    var entete = document.querySelector('.demande__titre');
+
+    var bloc = document.createElement('section');
+    bloc.className = 'recap';
+    bloc.innerHTML =
+      '<p class="surtitre">Dernière étape</p>' +
+      '<h2>Votre message est prêt</h2>' +
+      '<p>Relisez-le, puis envoyez-le. Nous vous répondons à l’adresse que vous ' +
+      'venez d’indiquer.</p>' +
+      '<pre></pre>' +
+      '<div class="recap__actions">' +
+      '  <button class="envoyer" type="button" id="r-envoyer">Envoyer</button>' +
+      '  <button class="bouton-fin" type="button" id="r-copier">Copier le message</button>' +
+      '  <button class="bouton-fin" type="button" id="r-modifier">Modifier</button>' +
+      '</div>' +
+      '<p class="recap__etat" id="r-etat"></p>';
+    bloc.querySelector('pre').textContent = corps;
+
+    entete.hidden = true;
+    form.hidden = true;
+    boiteErreurs.hidden = true;
+    form.parentElement.appendChild(bloc);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    var etat = document.getElementById('r-etat');
+
+    document.getElementById('r-envoyer').addEventListener('click', function () {
+      if (POINT_DE_COLLECTE) {
+        fetch(POINT_DE_COLLECTE, { method: 'POST', body: new FormData(form) })
+          .then(function (r) {
+            etat.textContent = r.ok
+              ? 'Message envoyé. Merci — nous revenons vers vous rapidement.'
+              : 'L’envoi a échoué. Copiez le message et écrivez-nous directement.';
+          })
+          .catch(function () {
+            etat.textContent = 'L’envoi a échoué. Copiez le message et écrivez-nous directement.';
+          });
+      } else if (ADRESSE) {
+        window.location.href = 'mailto:' + ADRESSE +
+          '?subject=' + encodeURIComponent(objet) +
+          '&body=' + encodeURIComponent(corps);
+        etat.textContent = 'Votre message vous attend dans votre logiciel de courrier — ' +
+          'il reste à l’envoyer.';
+      } else {
+        etat.textContent = 'Aucune adresse de destination n’est encore configurée sur ce ' +
+          'site. Copiez le message en attendant. (À renseigner dans assets/config.js.)';
+      }
+    });
+
+    document.getElementById('r-copier').addEventListener('click', function () {
+      navigator.clipboard.writeText(objet + '\n\n' + corps).then(function () {
+        etat.textContent = 'Message copié dans le presse-papiers.';
+      }, function () {
+        etat.textContent = 'La copie automatique a été refusée par le navigateur — ' +
+          'sélectionnez le texte ci-dessus.';
+      });
+    });
+
+    document.getElementById('r-modifier').addEventListener('click', function () {
+      bloc.remove();
+      form.hidden = false;
+      entete.hidden = false;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var manques = verifier();
+    if (manques.length) {
+      listeErreurs.innerHTML = '';
+      manques.forEach(function (m) {
+        var li = document.createElement('li');
+        li.textContent = m;
+        listeErreurs.appendChild(li);
+      });
+      boiteErreurs.hidden = false;
+      boiteErreurs.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    boiteErreurs.hidden = true;
+    confirmer();
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+bain-de-soleil	Bain de soleil	556x769
+chambre-2-dressing	Chambre 2 dressing	1085x1450
+chambre-2-bureau	Chambre 2 bureau	1085x1450
+chambre-2-salle-de-bains-1	Chambre 2 salle de bains 1	1084x1451
+chambre-2-salle-de-bains-2	Chambre 2 salle de bains 2	1085x1450
+chambre-2-terrasse	Chambre 2 terrasse	1086x1448
+chambre-2-vue-chambre-1	Chambre 2 vue chambre 1	1085x1450
+chambre-2-vue-chambre-2	Chambre 2 vue chambre 2	1448x1086
+chambre-2-vue-chambre-3	Chambre 2 vue chambre 3	1085x1450
+cuisine	Cuisine	1085x1450
+entree-sous-les-palmiers	Entrée sous les palmiers	1087x1446
+lounge-simple	Lounge simple	858x1215
+pavillon-depuis-la-piscine	Pavillon depuis la piscine	847x1158
+piscine-1	Piscine 1	1086x1448
+piscine-depuis-la-terrasse	Piscine depuis la terrasse	1084x1451
+plage-belle-riviere	Plage Belle rivière	1086x1448
+plage	Plage	1089x1330
+salle-a-manger	Salle à manger	553x762
+terrasse-piscine	Terrasse piscine	549x769
+allee-des-chambres	Allée des chambres	1085x1450
+chambre-1-baignoire	Chambre 1 baignoire	1085x1450
+chambre-1-bureau-2	Chambre 1 bureau 2	660x900
+chambre-1-douche	Chambre 1 douche	911x1215
+chambre-1-fauteuil	Chambre 1 fauteuil	1086x1448
+chambre-1-persiennes-sdb	Chambre 1 persiennes salle de bains	1448x1086
+chambre-1-terrasse-1	Chambre 1 terrasse 1	1086x1448
+chambre-1-terrasse-2	Chambre 1 terrasse 2	911x1215
+chambre-1	Chambre 1	1066x1475
+chambre-2-douche-exterieure	Chambre 2 douche exterieure	911x1215
+chambre-2-douche	Chambre 2 douche	911x1215
+chambre-2-wc	Chambre 2 WC	911x1215
+chambre-4-lit	Chambre 4 lit	1085x1450
+chambre-4	Chambre 4	1083x1452
+chambre-5	Chambre 5	1085x1450
+chambre-6-1	Chambre 6 1	1086x1448
+chambre-6-2	Chambre 6 2	1086x1448
+chambre-6-douche	Chambre 6 douche	1086x1448
+chambre-6-salle-de-bains	Chambre 6 salle de bains	1086x1448
+chambre-6-wc	Chambre 6 WC	1085x1450
+chambre-7-canape-et-bureau	Chambre 7 canapé et bureau	1078x1460
+chambre-7-canape	Chambre 7 canapé	1448x1086
+chambre-7-lit	Chambre 7 lit	1448x1086
+chambre-7-sdb	Chambre 7 salle de bains	1448x1086
+chambre-7-terrasse	Chambre 7 terrasse	660x900
+chambres-4-et-5-sdb	Chambres 4 et 5 salle de bains	1085x1450
+entree-la-nuit	Entrée la nuit	911x1215
+gazebo-depuis-la-piscine	Gazebo depuis la piscine	1067x1475
+gazebo-la-nuit	Gazebo la nuit	911x1215
+massage	Massage	911x1215
+piscine-2	Piscine 2	660x900
+piscine-2	Piscine 2	1182x1215
+piscine-depuis-salon	Piscine depuis salon	911x1215
+piscine-et-sculpture	Piscine et sculpture	911x1215
+piscine-la-nuit	Piscine la nuit	911x1215
+porte-d-entree-la-nuit	Porte d'entrée la nuit	911x1215
+salon-depuis-l-eau	Salon depuis l'eau	1620x1215
+salon-et-lounge	Salon et lounge	1537x1023
+salon-meuble-central	Salon meuble central	1071x1468
+salon-vue-canape	Salon vue canapé	1448x1086
+salon-vue-piscine-1	Salon vue piscine 1	1448x1086
+steles	Steles	660x900
+table-ext	Table extérieure	660x900
+cuisine-2	Cuisine, second point de vue	3024x4032

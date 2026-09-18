@@ -1,0 +1,37 @@
+0-vue-de-la-salle-a-manger	0 vue de la salle à manger	1024x768
+0-vue-de-la-chambre-4	0 vue de la chambre 4	1024x768
+chambre-1	Chambre 1	1024x768
+chambre-2	Chambre 2	1024x768
+chambre-3	Chambre 3	1024x768
+chambre-4-1	Chambre 4 1	1024x768
+chambre-4-2	Chambre 4 2	1024x768
+chambre-4-3	Chambre 4 3	1024x768
+chambre-4-5	Chambre 4 5	1024x768
+chambre-4-6	Chambre 4 6	1024x768
+chambre-4-7	Chambre 4 7	1024x768
+chambre-5-1	Chambre 5 1	1024x768
+chambre-5-2	Chambre 5 2	1024x768
+chambre-5-3	Chambre 5 3	1024x768
+cuisine-2	Cuisine 2	1024x768
+cuisine	Cuisine	1024x768
+dortoir	Dortoir	1024x768
+salle-de-bains-1-2	Salle de bains 1 2	1024x768
+salle-de-bains-1	Salle de bains 1	1024x768
+salle-de-bains-3	Salle de bains 3	1024x768
+salle-de-bains-4-1	Salle de bains 4 1	1024x768
+salle-de-bains-4-2	Salle de bains 4 2	1024x768
+salle-de-bains-4-3	Salle de bains 4 3	1024x768
+salle-de-bains-4-4	Salle de bains 4 4	1024x768
+salle-de-bains-5	Salle de bains 5	1024x768
+salle-de-bains-51	Salle de bains 51	1024x768
+ski-room-1	Ski room 1	1024x768
+ski-room-2	Ski room 2	1024x768
+spa-1	Spa 1	1024x768
+cuisine-et-salle-a-manger	Cuisine et salle à manger	1024x768
+sejour-1	Sejour 1	1024x768
+sejour-2	Sejour 2	1024x768
+sejour-3	Sejour 3	1024x768
+sejour-4	Sejour 4	1024x768
+spa-2	Spa 2	1024x768
+t-exterieur	T Exterieur	1024x768
+t-chalet-sous-la-neige	T chalet sous la neige	1024x768

@@ -1,0 +1,806 @@
+/* La Cachette — feuille commune
+   Repères : voir BRAND.md. Encre, ivoire, nuit ; Cormorant + Jost ; 900 ms. */
+
+:root{
+  --noir:#111110;
+  --ivoire:#f4f2ed;
+  --nuit:#090908;
+  --or:#b9a37e;
+  --trait:#111110;
+  --serif:"Cormorant Garamond", "EB Garamond", Garamond, "Times New Roman", serif;
+  --sans:"Jost", "Futura", "Avenir Next", system-ui, sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --duree:900ms;
+  --entete:76px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--ivoire); color:var(--noir);
+  font-family:var(--sans); font-weight:300;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%}
+
+/* ---------------------------------------------------------------- en-tête */
+.entete{
+  position:fixed; inset:0 0 auto 0; z-index:30;
+  height:var(--entete);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 clamp(18px,4vw,48px);
+  background:var(--ivoire);
+  border-bottom:1px solid var(--trait);
+}
+.marque{
+  font-family:var(--serif); font-size:clamp(20px,2.4vw,26px);
+  letter-spacing:.14em; text-transform:uppercase; text-decoration:none; color:inherit;
+}
+.nav{display:flex; gap:clamp(16px,2.4vw,34px)}
+.nav a{
+  font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+  text-decoration:none; color:inherit; opacity:.62;
+  transition:opacity .35s var(--ease);
+}
+.nav a:hover,.nav a[aria-current]{opacity:1}
+@media (max-width:640px){
+  :root{--entete:62px}
+  .nav a:not([aria-current]){display:none}
+}
+
+/* ------------------------------------------------------ page « nos maisons » */
+.maisons{
+  margin-top:var(--entete);
+  height:calc(100vh - var(--entete));
+  height:calc(100svh - var(--entete));
+  display:flex; flex-direction:column;
+}
+.maison{
+  position:relative; flex:1 1 0; min-height:0;
+  display:block; overflow:hidden;
+  text-decoration:none; color:var(--ivoire);
+  border-bottom:1px solid var(--trait);
+  background:#0e0e0d; isolation:isolate;
+}
+.maison:last-child{border-bottom:0}
+
+#m-grimaud img{object-position:center 50%}
+#m-maurice img{object-position:center 42%}
+#m-vars    img{object-position:center 45%}
+#m-grimaud{--embleme:url("logos/la-cachette-golfe-saint-tropez-blanc.svg")}
+#m-maurice{--embleme:url("logos/la-cachette-ile-maurice-blanc.svg")}
+#m-vars   {--embleme:url("logos/la-cachette-vars-blanc.svg")}
+
+.maison__media{position:absolute; inset:0; overflow:hidden}
+.maison__media img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  transform:scale(1.001);
+  filter:grayscale(1) contrast(1.02) brightness(1);
+  transition:transform var(--duree) var(--ease), filter var(--duree) var(--ease);
+  will-change:transform,filter;
+}
+.maison__media::after{
+  content:""; position:absolute; inset:0; z-index:1;
+  background:linear-gradient(100deg,rgba(9,9,8,.84) 0%,rgba(9,9,8,.48) 34%,
+                             rgba(9,9,8,.14) 66%,rgba(9,9,8,.26) 100%);
+  transition:opacity var(--duree) var(--ease);
+}
+.maison__media.vide{
+  background:radial-gradient(120% 160% at 20% 20%, #2a2a27 0%, #161614 55%, #0d0d0c 100%);
+}
+.maison__media.vide img{display:none}
+.maison__media.vide::before{
+  content:""; position:absolute; inset:0; z-index:1; opacity:.15;
+  background:var(--embleme) 72% 50%/auto 62% no-repeat;
+  transition:opacity var(--duree) var(--ease), transform var(--duree) var(--ease);
+}
+
+.maison__texte{
+  position:relative; z-index:2; height:100%;
+  display:flex; flex-direction:column; justify-content:center;
+  padding:0 clamp(22px,6vw,90px);
+  transform:translateY(6px);
+  transition:transform var(--duree) var(--ease);
+}
+.maison__index{font-size:10px; letter-spacing:.34em; opacity:.55; margin-bottom:.9em}
+.maison__nom{
+  font-family:var(--serif); font-weight:300;
+  font-size:clamp(38px,7.2vw,92px); line-height:.98; margin:0; letter-spacing:.02em;
+  text-shadow:0 2px 30px rgba(0,0,0,.45);
+}
+.maison__lieu{
+  margin-top:.85em; font-size:11px; letter-spacing:.26em; text-transform:uppercase; opacity:.7;
+}
+.maison__lien{
+  display:flex; align-items:center; gap:.8em;
+  margin-top:1.4em; font-size:10px; letter-spacing:.28em; text-transform:uppercase;
+  opacity:0; transform:translateY(10px);
+  transition:opacity var(--duree) var(--ease), transform var(--duree) var(--ease);
+}
+.maison__lien i{display:block; width:52px; height:1px; background:currentColor}
+.maison__bientot{
+  position:absolute; top:clamp(14px,2.4vw,26px); right:clamp(18px,4vw,44px);
+  z-index:3; font-size:9px; letter-spacing:.26em; text-transform:uppercase;
+  padding:.6em 1em; border:1px solid rgba(244,242,237,.34); color:rgba(244,242,237,.72);
+}
+
+.maison:hover .maison__media img,
+.maison:focus-visible .maison__media img,
+.maison.est-active .maison__media img{
+  filter:grayscale(0) contrast(1) brightness(1); transform:scale(1.07);
+}
+.maison:hover .maison__media::after,
+.maison:focus-visible .maison__media::after,
+.maison.est-active .maison__media::after{opacity:.88}
+.maison:hover .maison__media.vide::before,
+.maison:focus-visible .maison__media.vide::before,
+.maison.est-active .maison__media.vide::before{opacity:.34; transform:scale(1.03)}
+.maison:hover .maison__texte,
+.maison:focus-visible .maison__texte,
+.maison.est-active .maison__texte{transform:translateY(0)}
+.maison:hover .maison__lien,
+.maison:focus-visible .maison__lien,
+.maison.est-active .maison__lien{opacity:.92; transform:translateY(0)}
+.maisons:hover .maison:not(:hover) .maison__media img,
+.maisons.a-une-active .maison:not(.est-active) .maison__media img{
+  filter:grayscale(1) contrast(1.02) brightness(.58);
+}
+.maisons:hover .maison:not(:hover) .maison__texte,
+.maisons.a-une-active .maison:not(.est-active) .maison__texte{opacity:.72}
+@media (hover:none){ .maison__lien{opacity:.9; transform:none} }
+.maison:focus-visible{outline:2px solid var(--or); outline-offset:-4px}
+
+@media (max-width:640px){
+  .maisons{height:auto}
+  .maison{height:46svh; min-height:280px}
+}
+
+/* variante : trois colonnes côte à côte (index-colonnes.html) */
+.maisons.colonnes{flex-direction:row}
+.colonnes .maison{border-bottom:0; border-right:1px solid var(--trait)}
+.colonnes .maison:last-child{border-right:0}
+.colonnes #m-grimaud img{object-position:center 60%}
+.colonnes #m-maurice img{object-position:center 45%}
+.colonnes #m-vars    img{object-position:center 50%}
+.colonnes .maison__media::after{
+  background:linear-gradient(180deg,rgba(9,9,8,.10) 0%,rgba(9,9,8,.18) 45%,
+                             rgba(9,9,8,.62) 78%,rgba(9,9,8,.86) 100%);
+}
+.colonnes .maison__texte{
+  justify-content:flex-end;
+  padding:0 clamp(22px,3.4vw,52px) clamp(34px,5vw,66px);
+}
+.colonnes .maison__nom{font-size:clamp(34px,4.4vw,66px)}
+.colonnes .maison__lieu{font-size:10px}
+.colonnes .maison__media.vide::before{background-position:50% 36%; background-size:70% auto}
+@media (max-width:640px){
+  .maisons.colonnes{flex-direction:column}
+  .colonnes .maison{border-right:0; border-bottom:1px solid var(--trait)}
+}
+
+/* --------------------------------------------------------- page d'une maison */
+.hero{
+  position:relative; margin-top:var(--entete);
+  height:calc(100vh - var(--entete)); height:calc(100svh - var(--entete));
+  min-height:480px; overflow:hidden; background:#0e0e0d; color:var(--ivoire);
+  border-bottom:1px solid var(--trait);
+}
+/* les photos, empilées ; une seule visible, fondu entre deux */
+.hero__diapos{position:absolute; inset:0}
+.hero__diapos img{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:center 42%; display:block;
+  opacity:0; transition:opacity 1.6s var(--ease);
+}
+.hero__diapos img.est-visible{opacity:1}
+/* un lent zoom pendant que la photo est à l'écran */
+.hero__diapos img.anime{animation:hero-derive 9s linear forwards}
+@keyframes hero-derive{from{transform:scale(1)} to{transform:scale(1.06)}}
+
+.hero__commandes{
+  position:absolute; z-index:3; right:clamp(18px,4vw,44px); bottom:clamp(22px,3.6vw,40px);
+  display:flex; align-items:center; gap:14px;
+}
+.hero__fleche{
+  width:38px; height:38px; border:1px solid rgba(244,242,237,.45); background:none;
+  color:var(--ivoire); font-family:var(--serif); font-size:24px; line-height:1;
+  cursor:pointer; padding:0; transition:border-color .3s var(--ease), background .3s var(--ease);
+}
+.hero__fleche:hover,.hero__fleche:focus-visible{border-color:var(--ivoire); background:rgba(244,242,237,.12)}
+.hero__fleche:focus-visible,.hero__points button:focus-visible{outline:2px solid var(--or); outline-offset:2px}
+.hero__points{display:flex; gap:10px}
+.hero__points button{
+  width:7px; height:7px; padding:0; border:0; border-radius:50%; cursor:pointer;
+  background:rgba(244,242,237,.38); transition:background .3s var(--ease), transform .3s var(--ease);
+}
+.hero__points button[aria-current="true"]{background:var(--ivoire); transform:scale(1.3)}
+@media (max-width:640px){ .hero__fleche{display:none} }
+.hero::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(100deg,rgba(9,9,8,.78) 0%,rgba(9,9,8,.34) 40%,
+                             rgba(9,9,8,.10) 70%,rgba(9,9,8,.30) 100%);
+}
+/* Les URL d'un var() se résolvent depuis CETTE feuille, pas depuis la page :
+   les emblèmes sont donc déclarés ici et non en style en ligne. */
+.hero.h-grimaud{--embleme:url("logos/la-cachette-golfe-saint-tropez-blanc.svg")}
+.hero.h-maurice{--embleme:url("logos/la-cachette-ile-maurice-blanc.svg")}
+.hero.h-vars   {--embleme:url("logos/la-cachette-vars-blanc.svg")}
+
+.hero.vide{
+  background:radial-gradient(120% 160% at 20% 20%, #2a2a27 0%, #161614 55%, #0d0d0c 100%);
+}
+.hero.vide .hero__diapos{display:none}
+.hero.vide::before{
+  content:""; position:absolute; inset:0; z-index:1; opacity:.26;
+  background:var(--embleme) 72% 44%/auto 52% no-repeat;
+}
+.hero.vide::after{background:linear-gradient(100deg,rgba(9,9,8,.7) 0%,rgba(9,9,8,.2) 45%,rgba(9,9,8,0) 75%)}
+.hero__texte{
+  position:relative; z-index:2; height:100%;
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding:0 clamp(22px,6vw,90px) clamp(38px,6vw,74px);
+}
+.hero__index{font-size:10px; letter-spacing:.34em; text-transform:uppercase; opacity:.62}
+.hero h1{
+  font-family:var(--serif); font-weight:300; margin:.28em 0 0;
+  font-size:clamp(46px,9vw,116px); line-height:.94; letter-spacing:.02em;
+  text-shadow:0 2px 34px rgba(0,0,0,.45);
+}
+.hero__lieu{margin-top:.9em; font-size:11px; letter-spacing:.26em; text-transform:uppercase; opacity:.72}
+.hero__cta{
+  display:inline-flex; align-items:center; gap:.8em; align-self:flex-start;
+  margin-top:2.2em; color:inherit; text-decoration:none;
+  font-size:10px; letter-spacing:.28em; text-transform:uppercase;
+  border:1px solid rgba(244,242,237,.5); padding:1.1em 2.2em;
+  transition:background .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease);
+}
+.hero__cta:hover,.hero__cta:focus-visible{background:var(--ivoire); color:var(--noir); border-color:var(--ivoire)}
+
+.bloc{padding:clamp(56px,8vw,108px) clamp(22px,6vw,90px); border-bottom:1px solid #dfdbd2}
+.bloc:last-of-type{border-bottom:0}
+.bloc>h2{
+  font-family:var(--serif); font-weight:300; font-size:clamp(26px,3.4vw,44px);
+  margin:0 0 .9em; letter-spacing:.02em;
+}
+.surtitre{
+  font-size:10px; letter-spacing:.32em; text-transform:uppercase;
+  opacity:.5; margin:0 0 1.6em;
+}
+
+.intro{display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:clamp(30px,6vw,84px)}
+.intro p{font-family:var(--serif); font-size:clamp(19px,2.1vw,26px); line-height:1.5; margin:0 0 .8em}
+.intro p+p{font-size:clamp(15px,1.4vw,17px); font-family:var(--sans); line-height:1.75; opacity:.78}
+@media (max-width:820px){ .intro{grid-template-columns:1fr} }
+
+.enbref{list-style:none; margin:0; padding:0; border-top:1px solid #dfdbd2}
+.enbref li{
+  display:flex; justify-content:space-between; gap:20px;
+  padding:.95em 0; border-bottom:1px solid #dfdbd2;
+  font-size:13px; line-height:1.5;
+}
+.enbref b{font-weight:400; letter-spacing:.16em; text-transform:uppercase; font-size:10px; opacity:.55; flex:0 0 34%}
+.arediger{
+  border:1px solid #dfdbd2; padding:1.2em 1.4em; font-size:12px; line-height:1.7;
+  letter-spacing:.04em; opacity:.62;
+}
+
+.grille{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:clamp(10px,1.4vw,20px);
+}
+.grille figure{margin:0; position:relative}
+.grille button{
+  display:block; width:100%; padding:0; border:0; background:#e6e2d9;
+  cursor:zoom-in; overflow:hidden; line-height:0;
+}
+/* Sur la page d'une maison, les photos sont en couleur : c'est déjà la
+   récompense du clic. Le noir et blanc reste réservé à la page d'accueil. */
+.grille img{
+  width:100%; aspect-ratio:4/5; object-fit:cover; display:block;
+  filter:brightness(.94);
+  transition:transform var(--duree) var(--ease), filter var(--duree) var(--ease);
+}
+.grille button:hover img,.grille button:focus-visible img{
+  filter:brightness(1); transform:scale(1.05);
+}
+.grille figcaption{
+  margin-top:.7em; font-size:10px; letter-spacing:.2em; text-transform:uppercase; opacity:.5;
+}
+.grille button:focus-visible{outline:2px solid var(--or); outline-offset:3px}
+.grille .large{grid-column:span 2}
+.grille .large img{aspect-ratio:16/10}
+@media (max-width:560px){ .grille .large{grid-column:span 1} .grille .large img{aspect-ratio:4/5} }
+
+.plan{max-width:900px; margin:0 auto}
+.plan img{display:block; width:100%; border:1px solid #dfdbd2}
+
+/* ---------------------------------------------------------------- sommaire
+   Colonne fixe à droite, au milieu de l'écran. Invisible tant que le héros
+   est à l'écran, puis suit la lecture. Disparaît sous 1100 px. */
+.sommaire{
+  position:fixed; right:clamp(18px,2.6vw,40px); top:50%; z-index:15;
+  transform:translate(12px,-50%); opacity:0; pointer-events:none;
+  transition:opacity .6s var(--ease), transform .6s var(--ease);
+}
+.sommaire.est-visible{opacity:1; transform:translate(0,-50%); pointer-events:auto}
+.sommaire ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; align-items:flex-end}
+.sommaire a{
+  display:flex; align-items:center; gap:12px; flex-direction:row-reverse;
+  color:var(--noir); text-decoration:none;
+  font-size:10px; letter-spacing:.24em; text-transform:uppercase; opacity:.42;
+  transition:opacity .3s var(--ease);
+}
+.sommaire a i{display:block; width:18px; height:1px; background:currentColor; transition:width .4s var(--ease)}
+.sommaire a:hover,.sommaire a:focus-visible{opacity:.85}
+.sommaire a[aria-current]{opacity:1}
+.sommaire a[aria-current] i{width:38px}
+.sommaire a:focus-visible{outline:2px solid var(--or); outline-offset:4px}
+.bloc,.reserver{scroll-margin-top:var(--entete)}
+@media (max-width:1100px){ .sommaire{display:none} }
+/* on réserve la colonne de droite au sommaire pour qu'il ne couvre rien */
+@media (min-width:1101px){
+  .a-sommaire .bloc,.a-sommaire .reserver{padding-right:calc(clamp(22px,6vw,90px) + 230px)}
+  /* les filets entre sections s'arrêtent avant la colonne du sommaire */
+  .a-sommaire .bloc{position:relative; border-bottom:0}
+  .a-sommaire .bloc:not(:last-of-type)::after{
+    content:""; position:absolute; bottom:0; height:1px; background:#dfdbd2;
+    left:clamp(22px,6vw,90px); right:calc(clamp(22px,6vw,90px) + 230px);
+  }
+  .a-sommaire .reserver{border-top:0}
+  .a-sommaire .reserver::before{
+    content:""; position:absolute; top:0; height:1px; background:var(--noir);
+    left:clamp(22px,6vw,90px); right:calc(clamp(22px,6vw,90px) + 230px);
+  }
+  .a-sommaire .reserver{position:relative}
+  /* et le sommaire pose son propre fond, léger voile givré */
+  .sommaire{
+    padding:22px 20px 22px 26px; margin-right:-20px;
+    background:rgba(244,242,237,.78);
+    -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  }
+}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+
+/* ------------------------------------------------------------- visionneuse */
+.visionneuse{
+  position:fixed; inset:0; z-index:60; background:var(--nuit);
+  display:flex; align-items:center; justify-content:center; flex-direction:column;
+  padding:clamp(16px,4vw,54px);
+}
+.visionneuse[hidden]{display:none}
+.visionneuse img{max-width:100%; max-height:82vh; object-fit:contain; display:block}
+.visionneuse figcaption{
+  color:var(--ivoire); margin-top:1.2em;
+  font-size:10px; letter-spacing:.24em; text-transform:uppercase; opacity:.6;
+}
+.visionneuse figure{margin:0; display:flex; flex-direction:column; align-items:center}
+.visionneuse button{
+  position:absolute; background:none; border:0; color:var(--ivoire);
+  cursor:pointer; opacity:.55; padding:16px; line-height:1;
+  font-family:var(--serif); font-size:34px;
+  transition:opacity .3s var(--ease);
+}
+.visionneuse button:hover,.visionneuse button:focus-visible{opacity:1}
+.v-fermer{top:8px; right:14px; font-size:26px}
+.v-prec{left:6px; top:50%; transform:translateY(-50%)}
+.v-suiv{right:6px; top:50%; transform:translateY(-50%)}
+
+/* ------------------------------------------------------------------- pied */
+.pied{
+  background:var(--nuit); color:var(--ivoire);
+  padding:clamp(48px,7vw,84px) clamp(22px,6vw,90px) clamp(30px,4vw,44px);
+}
+.pied__maisons{display:flex; flex-wrap:wrap; gap:clamp(24px,5vw,70px); margin-bottom:clamp(34px,5vw,58px)}
+.pied__maisons a{
+  color:inherit; text-decoration:none;
+  font-family:var(--serif); font-size:clamp(22px,2.6vw,32px); font-weight:300;
+  opacity:.55; transition:opacity .4s var(--ease);
+}
+.pied__maisons a:hover,.pied__maisons a[aria-current]{opacity:1}
+.pied__bas{
+  display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px;
+  border-top:1px solid rgba(244,242,237,.16); padding-top:1.6em;
+  font-size:10px; letter-spacing:.22em; text-transform:uppercase; opacity:.5;
+}
+.pied__bas a{color:inherit}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition-duration:.01ms !important}
+  .maison__media img,.grille img{transform:none !important}
+  .hero__diapos img{animation:none !important}
+}
+
+/* ------------------------------------------------------------------ contact
+   Le principe : un formulaire en une colonne, et une fiche qui se remplit
+   en direct à côté. On ne demande que ce qui sert à répondre. */
+
+.contact{
+  margin-top:var(--entete);
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(320px,392px);
+  gap:clamp(30px,5vw,80px);
+  padding:clamp(48px,7vw,96px) clamp(22px,6vw,90px) clamp(60px,8vw,110px);
+  align-items:start;
+}
+/* en bas d'une page maison : même grille, sous un filet, sans marge de tête */
+.reserver{
+  display:grid; grid-template-columns:minmax(0,760px) minmax(280px,340px);
+  justify-content:center;
+  gap:clamp(24px,3.5vw,48px);
+  padding:clamp(48px,6vw,84px) clamp(22px,6vw,90px) clamp(56px,7vw,96px);
+  align-items:start;
+  background:#e8e3d8;
+  border-top:1px solid var(--noir);
+  scroll-margin-top:var(--entete);
+}
+.reserver .demande__titre{margin-bottom:clamp(4px,1vw,14px)}
+.reserver .demande__titre h2{font-size:clamp(30px,4vw,50px)}
+.reserver .demande__titre p{font-size:14px}
+.reserver>div:not(.demande__titre){
+  background:#fff; border:1px solid #d6d0c3;
+  padding:clamp(22px,3vw,38px) clamp(20px,3vw,40px) clamp(18px,2.4vw,30px);
+}
+.reserver .champs{margin-bottom:clamp(26px,3.2vw,38px)}
+.reserver .champs>legend{margin-bottom:1.1em}
+.reserver .fiche{background:#fff; border-color:#d6d0c3}
+.reserver .fiche h2{margin-bottom:1.1em}
+.reserver .cal-mois{gap:clamp(18px,2.6vw,36px)}
+.reserver .cal-grille{max-width:330px; margin:0 auto}
+.reserver .cal-case button{aspect-ratio:auto; height:34px; min-height:0; font-size:12.5px}
+.reserver .cal-titres span{font-size:clamp(16px,1.6vw,19px)}
+.reserver .cal-tete{margin-bottom:14px}
+.reserver .cal-grille>b{padding-bottom:.7em}
+.reserver .envoyer{margin-top:0}
+
+@media (max-width:900px){
+  .contact,.reserver{grid-template-columns:1fr}
+  /* en une colonne, la fiche passe devant : elle se remplit sous les yeux
+     pendant qu'on répond, au lieu d'arriver après le bouton d'envoi. */
+  .demande__titre{order:-2; margin-bottom:clamp(26px,5vw,40px)}
+  .fiche{position:static; order:-1; margin-bottom:clamp(30px,5vw,44px)}
+  .fiche__embleme{height:60px}
+}
+
+.demande__titre{grid-column:1 / -1; margin:0 0 clamp(10px,2vw,22px)}
+.demande__titre h1,.demande__titre h2{
+  font-family:var(--serif); font-weight:300; letter-spacing:.02em;
+  font-size:clamp(40px,6vw,76px); line-height:1; margin:.2em 0 0;
+}
+.demande__titre p{
+  margin:1.1em 0 0; max-width:44ch; font-size:15px; line-height:1.8; opacity:.72;
+}
+
+.champs{border:0; padding:0; margin:0 0 clamp(34px,4.5vw,52px); min-width:0}
+.champs>legend{
+  padding:0; margin:0 0 1.5em; width:100%;
+  font-size:10px; letter-spacing:.32em; text-transform:uppercase; opacity:.5;
+  border-bottom:1px solid #dfdbd2; padding-bottom:1em;
+}
+
+/* le choix de la maison : trois cartes gravées plutôt qu'une liste déroulante */
+.choixmaison{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px}
+.choixmaison input{position:absolute; opacity:0; width:0; height:0}
+.choixmaison label{
+  display:block; cursor:pointer; text-align:center;
+  border:1px solid #dfdbd2; padding:20px 12px 16px;
+  background:#fbfaf7;
+  transition:border-color .4s var(--ease), background .4s var(--ease);
+}
+.choixmaison label:hover{border-color:#b8b2a5}
+.choixmaison i{
+  display:block; height:54px; margin-bottom:14px;
+  background:var(--embleme) center/contain no-repeat;
+  opacity:.42; transition:opacity .4s var(--ease);
+}
+.choixmaison b{
+  display:block; font-family:var(--serif); font-weight:300; font-size:19px; letter-spacing:.02em;
+}
+.choixmaison small{
+  display:block; margin-top:.55em;
+  font-size:9px; letter-spacing:.2em; text-transform:uppercase; opacity:.5;
+}
+.choixmaison input:checked+label{border-color:var(--noir); background:#fff}
+.choixmaison input:checked+label i{opacity:1}
+.choixmaison input:focus-visible+label{outline:2px solid var(--or); outline-offset:2px}
+.c-grimaud{--embleme:url("logos/la-cachette-golfe-saint-tropez.svg")}
+.c-maurice{--embleme:url("logos/la-cachette-ile-maurice.svg")}
+.c-vars   {--embleme:url("logos/la-cachette-vars.svg")}
+
+.duo{display:grid; grid-template-columns:1fr 1fr; gap:clamp(12px,2vw,22px)}
+@media (max-width:520px){ .duo{grid-template-columns:1fr} }
+
+.champ{display:block; margin-bottom:22px}
+.champ>span{
+  display:block; margin-bottom:.7em;
+  font-size:10px; letter-spacing:.22em; text-transform:uppercase; opacity:.55;
+}
+.champ input,.champ textarea{
+  width:100%; font:inherit; font-size:15px; color:inherit;
+  background:transparent; border:0; border-bottom:1px solid #cfc9bc;
+  padding:.55em 0; border-radius:0; -webkit-appearance:none;
+  transition:border-color .35s var(--ease);
+}
+.champ textarea{resize:vertical; min-height:112px; line-height:1.7}
+.champ input:focus,.champ textarea:focus{outline:0; border-bottom-color:var(--noir)}
+.champ input::placeholder,.champ textarea::placeholder{color:#a9a294}
+.champ input:user-invalid,.champ textarea:user-invalid{border-bottom-color:#9c4a3c}
+.champ__aide{display:block; margin-top:.6em; font-size:11px; opacity:.5; line-height:1.6}
+
+.compteur{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  border-bottom:1px solid #cfc9bc; padding:.35em 0 .7em;
+}
+.compteur__nom{font-size:15px}
+.compteur__nom small{display:block; font-size:11px; opacity:.5; margin-top:.3em}
+.compteur__reglage{display:flex; align-items:center; gap:14px}
+.compteur button{
+  width:34px; height:34px; border:1px solid #cfc9bc; background:none; color:inherit;
+  font-size:17px; line-height:1; cursor:pointer; padding:0;
+  transition:border-color .3s var(--ease), color .3s var(--ease);
+}
+.compteur button:hover:enabled{border-color:var(--noir)}
+.compteur button:disabled{opacity:.3; cursor:default}
+.compteur button:focus-visible{outline:2px solid var(--or); outline-offset:2px}
+.compteur output{min-width:1.6em; text-align:center; font-size:15px; font-variant-numeric:tabular-nums}
+
+.envoyer{
+  width:100%; margin-top:8px; padding:1.25em 1em;
+  background:var(--noir); color:var(--ivoire); border:1px solid var(--noir);
+  font:inherit; font-size:11px; letter-spacing:.28em; text-transform:uppercase;
+  cursor:pointer; transition:background .4s var(--ease), color .4s var(--ease);
+}
+.envoyer:hover{background:transparent; color:var(--noir)}
+.envoyer:focus-visible{outline:2px solid var(--or); outline-offset:3px}
+
+.erreurs{
+  margin:0 0 20px; padding:1em 1.2em; border:1px solid #9c4a3c; color:#8c4234;
+  font-size:13px; line-height:1.7;
+}
+.erreurs ul{margin:.5em 0 0; padding-left:1.2em}
+
+/* la fiche qui se remplit en direct */
+.fiche{
+  position:sticky; top:calc(var(--entete) + 26px);
+  border:1px solid #dfdbd2; background:#fbfaf7; padding:clamp(24px,3vw,34px);
+}
+.fiche__embleme{
+  height:76px; margin-bottom:20px;
+  background:var(--embleme, none) center/contain no-repeat; opacity:.9;
+  transition:opacity .5s var(--ease);
+}
+.fiche__embleme.f-grimaud{--embleme:url("logos/la-cachette-golfe-saint-tropez.svg")}
+.fiche__embleme.f-maurice{--embleme:url("logos/la-cachette-ile-maurice.svg")}
+.fiche__embleme.f-vars   {--embleme:url("logos/la-cachette-vars.svg")}
+.fiche__embleme.vide{
+  background:none; opacity:1;
+  display:flex; align-items:center; justify-content:center;
+}
+.fiche__embleme.vide::before{
+  content:""; width:64px; height:1px; background:#cfc9bc;
+}
+.fiche h2{
+  font-family:var(--serif); font-weight:300; font-size:26px; letter-spacing:.02em;
+  margin:0 0 1.1em; text-align:center;
+}
+.fiche dl{margin:0; border-top:1px solid #e6e1d7}
+.fiche div{
+  display:flex; justify-content:space-between; gap:16px;
+  padding:.9em 0; border-bottom:1px solid #e6e1d7;
+}
+.fiche dt{font-size:10px; letter-spacing:.2em; text-transform:uppercase; opacity:.5}
+.fiche dd{margin:0; font-size:13px; text-align:right}
+.fiche dd.attente{opacity:.35}
+.fiche__maisons dd{font-family:var(--serif); font-size:20px; letter-spacing:.02em}
+.fiche__maisons a{color:inherit; text-decoration:none; border-bottom:1px solid transparent; transition:border-color .3s var(--ease)}
+.fiche__maisons a:hover,.fiche__maisons a:focus-visible{border-color:currentColor}
+.fiche__nuits{
+  margin:1.3em 0 0; text-align:center;
+  font-family:var(--serif); font-size:20px; letter-spacing:.02em;
+}
+.fiche__note{margin:1.6em 0 0; font-size:11px; line-height:1.75; opacity:.5}
+
+/* l'écran de confirmation */
+.recap{max-width:620px}
+.recap h2{
+  font-family:var(--serif); font-weight:300; font-size:clamp(30px,4vw,46px);
+  letter-spacing:.02em; margin:0 0 .5em;
+}
+.recap>p{font-size:15px; line-height:1.8; opacity:.75; margin:0 0 2em; max-width:48ch}
+.recap pre{
+  border:1px solid #dfdbd2; background:#fbfaf7; padding:1.6em;
+  font:inherit; font-size:13px; line-height:1.9; white-space:pre-wrap; margin:0 0 1.6em;
+}
+.recap__actions{display:flex; flex-wrap:wrap; gap:12px; align-items:center}
+.recap__actions .envoyer{width:auto; margin:0; padding:1.1em 2.4em}
+.bouton-fin{
+  background:none; border:1px solid #cfc9bc; color:inherit; font:inherit;
+  font-size:11px; letter-spacing:.28em; text-transform:uppercase;
+  padding:1.1em 2em; cursor:pointer;
+  transition:border-color .35s var(--ease);
+}
+.bouton-fin:hover{border-color:var(--noir)}
+.bouton-fin:focus-visible{outline:2px solid var(--or); outline-offset:3px}
+.recap__etat{font-size:12px; opacity:.55; margin:1.4em 0 0; line-height:1.7}
+
+/* --------------------------------------------------------- L'esprit, Séjours */
+
+/* ouverture claire, sans photo : le contrepoint des pages maison */
+.ouverture{
+  margin-top:var(--entete);
+  padding:clamp(64px,10vw,140px) clamp(22px,6vw,90px) clamp(48px,7vw,96px);
+  border-bottom:1px solid #dfdbd2;
+}
+.ouverture h1{
+  font-family:var(--serif); font-weight:300; letter-spacing:.02em;
+  font-size:clamp(44px,7.5vw,104px); line-height:.98; margin:.16em 0 0; max-width:16ch;
+}
+.ouverture__phrase{
+  font-family:var(--serif); font-size:clamp(20px,2.4vw,30px); line-height:1.5;
+  max-width:32ch; margin:1.1em 0 0; opacity:.82;
+}
+
+.rangee-emblemes{
+  display:flex; flex-wrap:wrap; gap:clamp(28px,6vw,84px);
+  align-items:flex-end; margin-top:clamp(46px,7vw,84px);
+}
+.rangee-emblemes a{
+  flex:1 1 180px; max-width:280px; text-decoration:none; color:inherit; text-align:center;
+}
+.rangee-emblemes i{
+  display:block; height:clamp(64px,8vw,104px);
+  background:var(--embleme) center/contain no-repeat;
+  opacity:.5; transition:opacity var(--duree) var(--ease), transform var(--duree) var(--ease);
+}
+.rangee-emblemes a:hover i,.rangee-emblemes a:focus-visible i{opacity:1; transform:translateY(-3px)}
+.rangee-emblemes span{
+  display:block; margin-top:1.1em;
+  font-size:10px; letter-spacing:.24em; text-transform:uppercase; opacity:.55;
+}
+.rangee-emblemes a:focus-visible{outline:2px solid var(--or); outline-offset:6px}
+
+/* un texte suivi, en deux colonnes : le propos à gauche, le détail à droite */
+.propos{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.25fr); gap:clamp(28px,6vw,84px)}
+.propos>h2{margin-top:0}
+.propos p{margin:0 0 1.15em; line-height:1.85; font-size:15px; max-width:62ch}
+.propos p:last-child{margin-bottom:0}
+.propos .avant{
+  font-family:var(--serif); font-size:clamp(19px,2vw,24px); line-height:1.55; opacity:.85;
+}
+@media (max-width:820px){ .propos{grid-template-columns:1fr} }
+
+/* les étapes d'un séjour */
+.etapes{list-style:none; margin:0; padding:0; display:grid; gap:clamp(18px,3vw,34px);
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.etapes li{border-top:1px solid var(--noir); padding-top:1.4em}
+.etapes b{
+  display:block; font-size:10px; letter-spacing:.32em; opacity:.45; margin-bottom:1.1em;
+  font-weight:400;
+}
+.etapes h3{
+  font-family:var(--serif); font-weight:300; font-size:clamp(21px,2.2vw,27px);
+  margin:0 0 .5em; letter-spacing:.02em;
+}
+.etapes p{margin:0; font-size:14px; line-height:1.8; opacity:.75}
+
+/* le tableau des trois maisons */
+.tableau{width:100%; border-collapse:collapse; font-size:14px}
+.tableau th,.tableau td{
+  text-align:left; vertical-align:top; padding:1.15em 1.2em 1.15em 0;
+  border-bottom:1px solid #dfdbd2;
+}
+.tableau thead th{
+  font-family:var(--serif); font-weight:300; font-size:clamp(20px,2.2vw,26px);
+  letter-spacing:.02em; border-bottom-color:var(--noir); padding-bottom:.7em;
+}
+.tableau thead th small{
+  display:block; font-family:var(--sans);
+  font-size:9px; letter-spacing:.2em; text-transform:uppercase; opacity:.5; margin-top:.7em;
+}
+.tableau tbody th{
+  font-weight:400; font-size:10px; letter-spacing:.2em; text-transform:uppercase;
+  opacity:.5; width:22%;
+}
+.tableau td{line-height:1.7}
+.tableau .vide{opacity:.35; font-style:italic}
+.tableau-cadre{overflow-x:auto}
+@media (max-width:700px){ .tableau{min-width:640px} }
+
+/* la bande d'appel, en pied de page */
+.appel{
+  background:var(--nuit); color:var(--ivoire);
+  padding:clamp(58px,8vw,104px) clamp(22px,6vw,90px);
+  display:flex; flex-wrap:wrap; gap:clamp(24px,4vw,52px);
+  align-items:center; justify-content:space-between;
+}
+.appel h2{
+  font-family:var(--serif); font-weight:300; letter-spacing:.02em;
+  font-size:clamp(28px,4vw,48px); margin:0; max-width:18ch;
+}
+.appel p{margin:.9em 0 0; font-size:14px; line-height:1.75; opacity:.6; max-width:42ch}
+.appel a{
+  flex:0 0 auto; text-decoration:none;
+  border:1px solid rgba(244,242,237,.5); color:inherit;
+  padding:1.25em 2.6em; font-size:11px; letter-spacing:.28em; text-transform:uppercase;
+  transition:background .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease);
+}
+.appel a:hover,.appel a:focus-visible{background:var(--ivoire); color:var(--noir); border-color:var(--ivoire)}
+
+/* ----------------------------------------------------------------- calendrier
+   Deux mois côte à côte, un seul sur mobile. On clique l'arrivée, puis le
+   départ ; la plage se remplit entre les deux. */
+
+.calendrier{margin-top:4px}
+.cal-tete{
+  display:flex; align-items:center; gap:14px;
+  margin-bottom:clamp(18px,2.4vw,26px);
+}
+.cal-tete button{
+  width:36px; height:36px; flex:0 0 auto;
+  border:1px solid #cfc9bc; background:none; color:inherit;
+  font-family:var(--serif); font-size:22px; line-height:1; cursor:pointer; padding:0;
+  transition:border-color .3s var(--ease), opacity .3s var(--ease);
+}
+.cal-tete button:hover:enabled{border-color:var(--noir)}
+.cal-tete button:disabled{opacity:.25; cursor:default}
+.cal-tete button:focus-visible{outline:2px solid var(--or); outline-offset:2px}
+.cal-titres{
+  flex:1; display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3vw,44px);
+  text-align:center;
+}
+.cal-titres span{
+  font-family:var(--serif); font-size:clamp(17px,1.9vw,21px); letter-spacing:.02em;
+}
+.cal-titres span::first-letter{text-transform:uppercase}
+
+.cal-mois{display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3vw,44px)}
+.cal-grille{display:grid; grid-template-columns:repeat(7,1fr); row-gap:2px}
+.cal-grille>b{
+  font-weight:400; text-align:center; padding-bottom:1em;
+  font-size:9px; letter-spacing:.14em; text-transform:uppercase; opacity:.42;
+}
+.cal-case{position:relative}
+.cal-case button{
+  position:relative; z-index:1;
+  width:100%; aspect-ratio:1; min-height:36px;
+  border:0; background:none; color:inherit; font:inherit; font-size:13px;
+  cursor:pointer; padding:0; font-variant-numeric:tabular-nums;
+  transition:background .25s var(--ease), color .25s var(--ease);
+}
+.cal-case button:disabled{opacity:.22; cursor:default}
+.cal-case button:not(:disabled):hover{background:#e9e4d9}
+.cal-case button:focus-visible{outline:2px solid var(--or); outline-offset:-2px}
+
+/* la plage : un fond posé sur la cellule, pour qu'il soit continu */
+.cal-case.dans::before{
+  content:""; position:absolute; inset:0; background:#e9e4d9;
+}
+.cal-case.bord-gauche::before{left:14%}
+.cal-case.bord-droite::before{right:14%}
+.cal-case.extremite button{background:var(--noir); color:var(--ivoire)}
+.cal-case.extremite button:hover{background:var(--noir)}
+.cal-case.aujourdhui button::after{
+  content:""; position:absolute; left:50%; bottom:16%; width:3px; height:3px;
+  margin-left:-1.5px; background:currentColor; opacity:.5;
+}
+
+.cal-pied{
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 20px;
+  margin-top:1.6em; padding-top:1.3em; border-top:1px solid #e6e1d7;
+}
+.cal-etat{margin:0; font-size:12px; letter-spacing:.06em; opacity:.62; flex:1 1 auto}
+.cal-effacer{
+  background:none; border:0; padding:0; color:inherit; font:inherit; cursor:pointer;
+  font-size:10px; letter-spacing:.22em; text-transform:uppercase; opacity:.55;
+  border-bottom:1px solid currentColor; padding-bottom:.35em;
+  transition:opacity .3s var(--ease);
+}
+.cal-effacer:hover{opacity:1}
+.cal-effacer[hidden]{display:none}
+.cal-effacer:focus-visible{outline:2px solid var(--or); outline-offset:3px}
+
+@media (max-width:720px){
+  .cal-titres{grid-template-columns:1fr}
+  .cal-mois{grid-template-columns:1fr}
+  .cal-mois>div:last-child{display:none}
+  .cal-titres span:last-child{display:none}
+}
