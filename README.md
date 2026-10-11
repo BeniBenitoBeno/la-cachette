@@ -1,19 +1,18 @@
 # La Cachette — le site
 
-Sept pages statiques, une feuille de style commune. Aucune dépendance, aucun
+Six pages statiques, une feuille de style commune. Aucune dépendance, aucun
 build, aucun framework.
 
 ```
-index.html          les trois maisons, en trois colonnes
+index.html          les deux maisons, en deux colonnes
 index-bandes.html   la même page en bandes horizontales (ancienne version, gardée)
 grimaud.html        01 — Golfe de Saint-Tropez   (complète, 41 photos)
 ile-maurice.html    02 — Océan Indien            (complète)
-vars.html           03 — Hautes-Alpes            (complète, 37 photos)
-esprit.html         ce qui relie les trois maisons
+esprit.html         ce qui relie les deux maisons
 sejours.html        le déroulé d'un séjour, le tableau comparatif
 contact.html        nous écrire (les demandes de séjour sont sur les pages maison)
 assets/style.css    toute la mise en forme
-assets/logos/       les trois signatures, en SVG, EPS et bitmap
+assets/logos/       les signatures, en SVG, EPS et bitmap
 assets/img/         les photos
 tools/              les scripts qui ont produit les logos et les photos
 ```
@@ -29,11 +28,11 @@ le serveur local évite les surprises de cache sur les images.
 
 ---
 
-## Les trois bandes de la page d'accueil
+## Les bandes de la page d'accueil
 
-- **Repos** : les trois bandes en noir et blanc, assombries.
+- **Repos** : les bandes en noir et blanc, assombries.
 - **Survol** : la bande passe en couleur, l'image zoome de 7 %, le nom remonte
-  et « Découvrir la maison » apparaît. Les deux autres s'assombrissent encore.
+  et « Découvrir la maison » apparaît. L'autre s'assombrit encore.
 - **Sortie / passage à une autre** : retour au noir et blanc en 900 ms.
 - **Clic** : la page de la maison.
 - **Clavier** : `Tab` déclenche le même effet (`:focus-visible`).
@@ -53,19 +52,19 @@ galeries par thème et le plan. Chaque photo s'ouvre dans une visionneuse
 ## L'esprit, Séjours
 
 **L'esprit** ouvre en clair, sans photo — c'est le contrepoint des pages maison :
-le sens du nom, le fil qui relie les trois emblèmes, et pourquoi une gravure
+le sens du nom, le fil qui relie les deux emblèmes, et pourquoi une gravure
 plutôt qu'un logotype. Le dernier bloc, « Comment tout a commencé », est laissé
 vide : ce paragraphe ne peut venir que des propriétaires.
 
 **Séjours** explique le déroulé en trois temps (demander, échanger, venir) et
-pose un tableau comparatif des trois maisons. Seule la colonne Île Maurice est
+pose un tableau comparatif des deux maisons. Seule la colonne Île Maurice est
 remplie — et uniquement avec ce qui se lit sur le plan. Les conditions
 (saisons, tarifs, ce qui est compris, acompte, annulation) sont un bloc « à
 renseigner » : aucun chiffre n'a été inventé.
 
-## Grimaud et Vars : pages générées
+## Pages générées
 
-`tools/generer_page_maison.py grimaud` (ou `vars`) écrit la page entière à partir
+`tools/generer_page_maison.py grimaud` écrit la page entière à partir
 du descriptif en tête du script — textes, « en bref », photos du héros,
 sections et légendes — en reprenant en-tête, formulaire, pied et visionneuse
 de la page Île Maurice. Pour changer une légende ou déplacer une photo, on
@@ -141,7 +140,7 @@ se remplit en direct à côté : l'emblème de la maison, les dates en toutes
 lettres, le nombre de nuits, les voyageurs. La maison n'est plus à choisir :
 elle est portée par la page (`<form data-maison="…">`), et le calendrier, la
 fiche, les contrôles et le récapitulatif sont dans `assets/reservation.js`,
-commun aux trois pages. En dessous de 900 px, la fiche passe au-dessus du
+commun aux pages maison. En dessous de 900 px, la fiche passe au-dessus du
 formulaire pour rester sous les yeux pendant la saisie.
 
 **Les dates se prennent au calendrier**, pas dans deux champs `jj/mm/aaaa` :
@@ -204,9 +203,8 @@ vous tenez.
 
 | Bande | Fichier attendu            | État        |
 |-------|----------------------------|-------------|
-| 01    | `assets/img/grimaud.jpg`   | à fournir   |
+| 01    | `assets/img/grimaud.jpg`   | en place    |
 | 02    | `assets/img/maurice.jpg`   | en place    |
-| 03    | `assets/img/vars.jpg`      | à fournir   |
 
 Tant que le fichier est absent, la bande **et** le héros de la page basculent
 sur l'emblème gravé de la maison, avec la mention « Photos à venir ». Il suffit
@@ -220,7 +218,6 @@ Le cadrage vertical se règle dans `assets/style.css` :
 ```css
 #m-grimaud img{object-position:center 50%}
 #m-maurice img{object-position:center 42%}
-#m-vars    img{object-position:center 45%}
 ```
 
 ### Les galeries
@@ -247,13 +244,12 @@ dossier.
 
 ## Les logos
 
-`assets/logos/` contient les trois signatures :
+`assets/logos/` contient les signatures :
 
 | Lieu                  | Vectoriel                            | Réserve blanche                            | Imprimeur | Bitmap |
 |-----------------------|--------------------------------------|--------------------------------------------|-----------|--------|
 | Golfe de Saint-Tropez | `la-cachette-golfe-saint-tropez.svg` | `la-cachette-golfe-saint-tropez-blanc.svg` | `.eps`    | `.jpg` |
 | Île Maurice           | `la-cachette-ile-maurice.svg`        | `la-cachette-ile-maurice-blanc.svg`        | `.eps`    | `.jpg` |
-| Vars                  | `la-cachette-vars.svg`               | `la-cachette-vars-blanc.svg`               | `.eps`    | `.png` |
 
 Les `.svg` sont en `fill="currentColor"` : posés en SVG *en ligne*, ils prennent
 la couleur du texte environnant. Les `-blanc.svg` sont blancs en dur, pour un
@@ -264,24 +260,31 @@ Les `.eps` sont en noir plein, sans vignette de prévisualisation intégrée
 (normal, et sans conséquence : Illustrator, InDesign et les RIP les ouvrent).
 Leur boîte est en points, à l'échelle du SVG.
 
-Poids : Maurice 124 Ko, Vars 161 Ko, Grimaud 585 Ko en SVG. Le tracé de Grimaud
+Poids : Maurice 124 Ko, Grimaud 585 Ko en SVG. Le tracé de Grimaud
 est lourd parce que la gravure d'origine est très fournie ; pour un usage web
 léger (favicon, en-tête), préférer le bitmap.
 
 ### Régénérer
 
 ```bash
-python tools/vectoriser_logos.py   # les deux gravures d'origine -> SVG
-python tools/logo_vars.py          # dessine et vectorise le logo Vars
-python tools/exporter_eps.py       # les trois SVG -> EPS
+python tools/vectoriser_logos.py   # les gravures d'origine -> SVG
+python tools/exporter_eps.py       # les SVG -> EPS
+python tools/planche_logos.py      # la planche de contact
 ```
 
 `tools/svgkit.py` porte la chaîne commune (seuil d'encre 135, tracé spline) :
-les trois logos ont donc exactement la même texture de trait. Tous les réglages
-du dessin de Vars — sommets des crêtes, mélèzes, densité de l'eau, position du
-soleil dans le col — sont en haut de `tools/logo_vars.py`.
+les logos ont donc exactement la même texture de trait.
 
-`logos-planche.png` est une planche de contact des trois, pour comparaison.
+`logos-planche.png` est une planche de contact des signatures, pour comparaison.
+
+### Le logo Vars, mis de côté
+
+La maison de Vars a été retirée du site, mais son logo reste dans
+`assets/logos/la-cachette-vars.*` et son dessin paramétrique dans
+`tools/logo_vars.py` (sommets des crêtes, mélèzes, densité de l'eau, position
+du soleil). Rien sur le site n'y renvoie plus. Les photos, la page et la
+colonne d'accueil sont dans l'historique git, au commit qui précède leur
+retrait.
 
 ---
 
@@ -289,5 +292,5 @@ soleil dans le col — sont en haut de `tools/logo_vars.py`.
 
 - **La destination du formulaire** — voir « Brancher l'envoi » plus haut.
 - Les entrées de menu **L'esprit** et **Séjours** pointent encore sur `#`.
-- Les blocs « À renseigner » de Grimaud et Vars attendent le nombre de chambres,
-  les pièces, les extérieurs et la saison d'ouverture.
+- Dans `sejours.html`, la colonne **Grimaud** du tableau comparatif est encore
+  « à renseigner », alors que la page Grimaud, elle, est complète.

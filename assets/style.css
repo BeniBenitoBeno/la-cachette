@@ -65,10 +65,8 @@ img{max-width:100%}
 
 #m-grimaud img{object-position:center 50%}
 #m-maurice img{object-position:center 42%}
-#m-vars    img{object-position:center 45%}
 #m-grimaud{--embleme:url("logos/la-cachette-golfe-saint-tropez-blanc.svg")}
 #m-maurice{--embleme:url("logos/la-cachette-ile-maurice-blanc.svg")}
-#m-vars   {--embleme:url("logos/la-cachette-vars-blanc.svg")}
 
 .maison__media{position:absolute; inset:0; overflow:hidden}
 .maison__media img{
@@ -160,7 +158,6 @@ img{max-width:100%}
 .colonnes .maison:last-child{border-right:0}
 .colonnes #m-grimaud img{object-position:center 60%}
 .colonnes #m-maurice img{object-position:center 45%}
-.colonnes #m-vars    img{object-position:center 50%}
 .colonnes .maison__media::after{
   background:linear-gradient(180deg,rgba(9,9,8,.10) 0%,rgba(9,9,8,.18) 45%,
                              rgba(9,9,8,.62) 78%,rgba(9,9,8,.86) 100%);
@@ -223,7 +220,6 @@ img{max-width:100%}
    les emblèmes sont donc déclarés ici et non en style en ligne. */
 .hero.h-grimaud{--embleme:url("logos/la-cachette-golfe-saint-tropez-blanc.svg")}
 .hero.h-maurice{--embleme:url("logos/la-cachette-ile-maurice-blanc.svg")}
-.hero.h-vars   {--embleme:url("logos/la-cachette-vars-blanc.svg")}
 
 .hero.vide{
   background:radial-gradient(120% 160% at 20% 20%, #2a2a27 0%, #161614 55%, #0d0d0c 100%);
@@ -504,7 +500,6 @@ html{scroll-behavior:smooth}
 .choixmaison input:focus-visible+label{outline:2px solid var(--or); outline-offset:2px}
 .c-grimaud{--embleme:url("logos/la-cachette-golfe-saint-tropez.svg")}
 .c-maurice{--embleme:url("logos/la-cachette-ile-maurice.svg")}
-.c-vars   {--embleme:url("logos/la-cachette-vars.svg")}
 
 .duo{display:grid; grid-template-columns:1fr 1fr; gap:clamp(12px,2vw,22px)}
 @media (max-width:520px){ .duo{grid-template-columns:1fr} }
@@ -570,7 +565,6 @@ html{scroll-behavior:smooth}
 }
 .fiche__embleme.f-grimaud{--embleme:url("logos/la-cachette-golfe-saint-tropez.svg")}
 .fiche__embleme.f-maurice{--embleme:url("logos/la-cachette-ile-maurice.svg")}
-.fiche__embleme.f-vars   {--embleme:url("logos/la-cachette-vars.svg")}
 .fiche__embleme.vide{
   background:none; opacity:1;
   display:flex; align-items:center; justify-content:center;

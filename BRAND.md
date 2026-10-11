@@ -3,24 +3,25 @@
 Base de travail déduite des logos et appliquée telle quelle à la page
 « Nos maisons ». À valider / corriger avant d'aller plus loin.
 
-Aperçu des trois signatures : `logos-planche.png`.
+Aperçu des signatures : `logos-planche.png`.
 
 ---
 
 ## 1. Architecture de marque
 
-Une marque mère, trois lieux. Le nom ne change pas, le lieu se pose en second.
+Une marque mère, deux lieux. Le nom ne change pas, le lieu se pose en second.
 
 ```
 La Cachette
 ├── La Cachette — Golfe de Saint-Tropez   (Grimaud, Var)
-├── La Cachette — Île Maurice
-└── La Cachette — Vars                    (Hautes-Alpes)
+└── La Cachette — Île Maurice
 ```
 
-Sur le site, on écrit toujours le lieu seul en titre (**Grimaud**, **Île Maurice**,
-**Vars**) et la précision géographique en sous-titre. « La Cachette » reste dans
-l'en-tête : la marque n'a pas à être répétée trois fois dans la même page.
+*(Vars a été retirée du site ; son logo reste dessiné, voir plus bas.)*
+
+Sur le site, on écrit toujours le lieu seul en titre (**Grimaud**, **Île Maurice**)
+et la précision géographique en sous-titre. « La Cachette » reste dans
+l'en-tête : la marque n'a pas à être répétée à chaque fois dans la même page.
 
 **À trancher** : le logo Maurice signe « Ile Maurice » sans accent, le logo Var
 signe « Golfe de Saint Tropez » sans trait d'union. Sur le site j'ai typographié
@@ -31,7 +32,7 @@ logos sur le site, soit l'inverse, mais il faut choisir.
 
 ## 2. Logos
 
-Trois signatures, une seule grammaire : **gravure au trait noir, bassin
+Une seule grammaire pour toutes les signatures : **gravure au trait noir, bassin
 rectangulaire en perspective avec son reflet, un arbre du lieu de chaque côté,
 un soleil bas sur l'horizon, trois oiseaux**, puis le nom.
 
@@ -39,7 +40,6 @@ un soleil bas sur l'horizon, trois oiseaux**, puis le nom.
 |-----------------------|-------------------------------|-----------------|
 | Golfe de Saint-Tropez | pin parasol, pin d'Alep       | mer             |
 | Île Maurice           | baobab, palmiers, pavillon    | lagon           |
-| Vars                  | mélèzes                       | crête alpine    |
 
 ### Fichiers
 
@@ -50,25 +50,23 @@ Chaque logo existe en trois formes dans `assets/logos/` :
 | `<nom>.svg`                   | `fill="currentColor"` — SVG en ligne, prend la couleur du texte |
 | `<nom>-blanc.svg`             | blanc en dur — pour `<img>` sur fond sombre           |
 | `<nom>.eps`                   | noir plein, pour l'imprimeur — boîte en points, sans vignette |
-| `<nom>.jpg` / `.png`          | bitmap d'origine, ou son équivalent pour Vars         |
+| `<nom>.jpg`                   | la gravure bitmap d'origine                           |
 
 Les SVG sont des vectorisations des gravures d'origine (chaîne commune :
 `tools/svgkit.py`, seuil d'encre 135, tracé spline). Ils tiennent
 l'agrandissement, la réserve blanche et l'impression.
 
-**Vars** n'existait pas : il a été dessiné pour compléter la famille
-(`tools/logo_vars.py`, dessin paramétrique passé dans la même chaîne de
-vectorisation, donc même texture de trait). Le lettrage « La Cachette » y est
-repris tel quel du logo Golfe de Saint-Tropez — les trois noms sont donc
-rigoureusement identiques. Le mot « Vars » est composé en Garamond, comme le
-sous-titre de Grimaud.
+**Vars** : la maison a été retirée du site, mais son logo reste dessiné et
+vectorisé (`tools/logo_vars.py` + `assets/logos/la-cachette-vars.*`), dans la
+même grammaire et la même chaîne de vectorisation. Rien sur le site n'y renvoie
+plus ; il est prêt si la maison revient.
 
 ### Usage
 
 - fond ivoire, blanc ou photo très sombre — jamais sur une photo claire ;
 - zone de protection = hauteur du mot « La Cachette » sur les quatre côtés ;
 - taille minimale à l'écran : **180 px de large** pour les deux logos paysage
-  (Grimaud, Vars), 120 px pour le logo carré (Maurice) — en dessous, la gravure
+  (Grimaud), 120 px pour le logo carré (Maurice) — en dessous, la gravure
   se referme ;
 - monochrome uniquement, pas d'ombre, pas de dégradé, pas de rotation.
 
@@ -151,20 +149,19 @@ une réservation » plutôt qu'une réponse garantie sous 24 h.
 
 ### Tranché
 
-- **Logo Vars** : validé. Les réglages restent ouverts dans `tools/logo_vars.py`.
+- **Maison de Vars** : retirée du site le 11/10/2026. Le logo est conservé,
+  les photos et la page sont dans l'historique git.
 - **Orthographe des signatures** : les logos gardent « Ile Maurice » et « Golfe
   de Saint Tropez » tels quels ; le site écrit « Île Maurice » et « Golfe de
   Saint-Tropez ». L'écart est assumé.
-- **Sous-titre** : Maurice reste en italique, Grimaud et Vars en romain.
+- **Sous-titre** : Maurice reste en italique, Grimaud en romain.
   L'irrégularité ne gêne pas, on n'y touche pas.
-- **EPS** : produits pour les trois logos.
+- **EPS** : produits pour tous les logos.
 
 ### Ouvert
 
-1. **Photos Vars en 1 024 px seulement** — trop petites pour un héros plein
-   écran sur grand moniteur ; demander les originaux.
-2. **Or pâle** : entre-t-il dans la palette, oui ou non ? Il ne sert
+1. **Or pâle** : entre-t-il dans la palette, oui ou non ? Il ne sert
    aujourd'hui qu'au contour de focus clavier.
-3. **Envoi des demandes** — les formulaires (séjour sur chaque page maison,
+2. **Envoi des demandes** — les formulaires (séjour sur chaque page maison,
    message sur la page contact) ne partent nulle part tant qu'une adresse ou un
    point de collecte n'est pas renseigné dans `assets/config.js`.

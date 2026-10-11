@@ -10,7 +10,7 @@
   var form = document.getElementById('demande');
   if (!form) return;
   var MAISON = form.dataset.maison;        // « Île Maurice », « Grimaud — … »
-  var CLE = form.dataset.cle;              // maurice / grimaud / vars
+  var CLE = form.dataset.cle;              // maurice / grimaud
 
   /* Dates déjà prises sur les plateformes (Airbnb, Booking…), lues dans
      disponibilites/<cle>.json, produit par tools/synchroniser_calendriers.py.

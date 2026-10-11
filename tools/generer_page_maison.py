@@ -5,7 +5,8 @@ visionneuse et scripts en sont repris tels quels ; seul le contenu entre le
 héros et « Séjourner ici » est produit ici.
 
     python tools/generer_page_maison.py grimaud
-    python tools/generer_page_maison.py vars
+
+(Vars a été retirée du site ; son descriptif est dans l'historique git.)
 """
 import html
 import os
@@ -99,88 +100,6 @@ MAISONS = {
             ]),
             ("plage", "Au bout du chemin", "La plage", [
                 ("plage", "La plage"),
-            ]),
-        ],
-    },
-    "vars": {
-        "page": "vars.html",
-        "titre": "Vars — La Cachette",
-        "description": "La Cachette Vars : un chalet de cinq chambres et un dortoir au pied des pistes, spa, cheminée, ski room.",
-        "classe": "h-vars",
-        "index": "03 — Hautes-Alpes",
-        "nom": "Vars",
-        "lieu": "Cinq chambres et un dortoir · spa · au pied des pistes",
-        "valeur": "Vars — Hautes-Alpes",
-        "hero": [
-            ("t-chalet-sous-la-neige", "Le chalet sous la neige", "center 45%"),
-            ("0-vue-de-la-chambre-4", "La vallée depuis la chambre 4", "center 50%"),
-            ("sejour-2", "Le séjour et la cheminée", "center 50%"),
-            ("chambre-4-1", "La chambre 4, sous le toit", "center 50%"),
-            ("spa-2", "Le spa", "center 50%"),
-            ("chambre-5-3", "Les sommets depuis la chambre 5", "center 50%"),
-        ],
-        "intro": [
-            "Un chalet de bois et de pierre, à Vars, dans les Hautes-Alpes, à quelques "
-            "pas des remontées mécaniques. Les balcons donnent sur la vallée et les "
-            "mélèzes ; l'hiver, la neige monte jusqu'aux fenêtres.",
-            "Dedans, un grand séjour autour de la cheminée, une cuisine ouverte sur la "
-            "salle à manger, cinq chambres et un dortoir pour les enfants. La chambre "
-            "sous le toit a son balcon et sa longue-vue. Un spa extérieur et une ski "
-            "room au retour des pistes.",
-        ],
-        "enbref": [
-            ("Chambres", "5, plus un dortoir — la chambre 4 sous le toit, avec balcon"),
-            ("Salles de bains", "4, dont une avec baignoire"),
-            ("Pièces de vie", "Séjour avec cheminée, cuisine ouverte sur la salle à manger"),
-            ("Extérieur", "Spa, balcons sur la vallée"),
-            ("Aussi", "Ski room, longue-vue"),
-            ("Pistes", "Remontées mécaniques à pied"),
-        ],
-        "sections": [
-            ("exterieurs", "Dehors", "Le chalet, la neige et la vallée", [
-                ("t-chalet-sous-la-neige", "Le chalet sous la neige", True),
-                ("0-vue-de-la-salle-a-manger", "La vallée depuis la salle à manger"),
-                ("0-vue-de-la-chambre-4", "La vallée depuis la chambre 4"),
-                ("chambre-4-3", "Le balcon de la chambre 4"),
-                ("chambre-5-3", "Les sommets depuis la chambre 5"),
-                ("spa-1", "Le spa, face aux mélèzes"),
-                ("spa-2", "Le spa"),
-            ]),
-            ("vie", "Dedans", "Le séjour, la cheminée et la cuisine", [
-                ("sejour-1", "Le séjour", True),
-                ("sejour-2", "Le séjour et la cheminée"),
-                ("sejour-3", "La cheminée"),
-                ("sejour-4", "Le feu"),
-                ("cuisine-et-salle-a-manger", "La cuisine et la salle à manger"),
-                ("cuisine", "La cuisine"),
-                ("cuisine-2", "Détail de la cuisine"),
-                ("ski-room-1", "La ski room"),
-                ("ski-room-2", "La ski room, vers la vallée"),
-            ]),
-            ("chambres", "Dormir", "Les cinq chambres et le dortoir", [
-                ("chambre-4-1", "Chambre 4, sous le toit", True),
-                ("chambre-4-2", "Chambre 4, vers le balcon"),
-                ("chambre-4-5", "Chambre 4, le mur de pierre"),
-                ("chambre-4-6", "Chambre 4, détail"),
-                ("chambre-4-7", "Chambre 4, la longue-vue"),
-                ("chambre-1", "Chambre 1"),
-                ("chambre-2", "Chambre 2"),
-                ("chambre-3", "Chambre 3"),
-                ("chambre-5-1", "Chambre 5"),
-                ("chambre-5-2", "Chambre 5, vers la fenêtre"),
-                ("dortoir", "Le dortoir"),
-                ("salle-de-bains-1", "Salle de bains 1"),
-                ("salle-de-bains-1-2", "Salle de bains 1, la douche"),
-                ("salle-de-bains-3", "Salle de bains 3"),
-                ("salle-de-bains-4-1", "Salle de bains 4, la baignoire", True),
-                ("salle-de-bains-4-2", "Salle de bains 4, détail"),
-                ("salle-de-bains-4-3", "Salle de bains 4, les vasques"),
-                ("salle-de-bains-4-4", "Salle de bains 4, détail"),
-                ("salle-de-bains-5", "Salle de bains 5"),
-                ("salle-de-bains-51", "Salle de bains 5, la vasque"),
-            ]),
-            ("pistes", "Au pied des pistes", "Le chalet et les remontées mécaniques", [
-                ("t-exterieur", "Le chalet, à gauche les remontées mécaniques"),
             ]),
         ],
     },
