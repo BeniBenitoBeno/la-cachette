@@ -770,10 +770,12 @@ html{scroll-behavior:smooth}
 }
 
 /* les trois saisons : le casier porte la teinte, la plage choisie la recouvre */
-.cal-case.s-basse  {background:#f2efe6}
-.cal-case.s-moyenne{background:#e7ddc9}
-.cal-case.s-haute  {background:#d2c3a2}
-.cal-case.s-haute button small{opacity:.72}
+.cal-case.s-basse  {background:#faf8f3}
+.cal-case.s-moyenne{background:#f3ece0}
+.cal-case.s-haute  {background:#eae0ca}
+.cal-case.s-haute button small{opacity:.7}
+/* hors grille tarifaire : fermé, sans teinte ni prix */
+.cal-case.hors-grille button{opacity:.2}
 .cal-case.extremite button small{opacity:.8}
 .cal-case.pris button small{opacity:.3; text-decoration:none}
 .cal-case button:disabled{opacity:.22; cursor:default}
@@ -782,7 +784,7 @@ html{scroll-behavior:smooth}
 
 /* la plage : un fond posé sur la cellule, pour qu'il soit continu */
 .cal-case.dans::before{
-  content:""; position:absolute; inset:0; background:rgba(17,17,16,.11);
+  content:""; position:absolute; inset:0; background:rgba(17,17,16,.13);
 }
 .cal-case.bord-gauche::before{left:14%}
 .cal-case.bord-droite::before{right:14%}
@@ -803,9 +805,9 @@ html{scroll-behavior:smooth}
 .cal-saisons i{
   display:inline-block; width:16px; height:16px; border:1px solid rgba(17,17,16,.12);
 }
-.cal-saisons .s-basse   i{background:#f2efe6}
-.cal-saisons .s-moyenne i{background:#e7ddc9}
-.cal-saisons .s-haute   i{background:#d2c3a2}
+.cal-saisons .s-basse   i{background:#faf8f3}
+.cal-saisons .s-moyenne i{background:#f3ece0}
+.cal-saisons .s-haute   i{background:#eae0ca}
 .cal-saisons b{font-weight:400; text-transform:uppercase; opacity:.75}
 .cal-saisons span{opacity:.5; font-variant-numeric:tabular-nums}
 .cal-tarifs-note{margin:10px 0 0; font-size:11px; line-height:1.7; opacity:.55}

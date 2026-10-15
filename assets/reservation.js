@@ -53,7 +53,6 @@
   }
   var euros = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR',
                                                maximumFractionDigits: 0 });
-  var nombre = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
   function chargerTarifs() {
     if (!CLE || !window.fetch) return;
     fetch('tarifs/' + CLE + '.json', { cache: 'no-cache' })
@@ -62,6 +61,14 @@
         if (!donnees || !donnees.periodes) return;
         tarifs = donnees;
         cal.classList.add('a-tarifs');          // cases plus hautes, prix visibles
+        /* si le mois courant n'est pas encore tarifé, on ouvre sur le premier
+           mois qui l'est — inutile de montrer une page vide */
+        var premiereNuit = donnees.periodes.length ? duJour(donnees.periodes[0].de) : null;
+        if (premiereNuit && premiereNuit > aujourdhui) {
+          premierMois = new Date(premiereNuit.getFullYear(), premiereNuit.getMonth(), 1);
+          moisVu = new Date(premierMois);
+          focusJour = new Date(premiereNuit);
+        }
         var note = document.getElementById('cal-tarifs-note');
         if (note && donnees.note) { note.textContent = donnees.note; note.hidden = false; }
         var legende = document.getElementById('cal-saisons');
@@ -339,16 +346,18 @@
       bt.dataset.jour = cle(d);
       bt.setAttribute('aria-label', jourLong.format(d));
       bt.tabIndex = -1;
-      var periode = periodeDe(d);
+      var periode = tarifs ? periodeDe(d) : null;
       if (periode && d >= aujourdhui) {
         casier.classList.add('s-' + periode.saison);
         var p = document.createElement('small');
-        p.textContent = nombre.format(periode.tarif);        // sans € : la légende le dit
+        p.textContent = euros.format(periode.tarif);
         bt.appendChild(p);
         bt.setAttribute('aria-label', jourLong.format(d) + ' — saison ' + periode.saison +
                         ', ' + euros.format(periode.tarif) + ' la nuit');
       }
       if (d < aujourdhui) bt.disabled = true;
+      /* une grille tarifaire existe : ce qu'elle ne couvre pas n'est pas ouvert */
+      if (tarifs && !periodeDe(d)) { bt.disabled = true; casier.classList.add('hors-grille'); }
       if (nuitPrise(d)) {
         casier.classList.add('pris');
         /* on peut encore y poser un départ : le bouton reste cliquable */

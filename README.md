@@ -102,12 +102,16 @@ taxes incluses), relevé case par case au pixel près :
 | 1 → 31 oct 2027 | moyenne | 1 100 € |
 
 Le calendrier affiche le prix sous chaque date, à la manière d'Airbnb, et la
-fiche totalise le séjour nuit par nuit. Chaque saison a sa teinte, reprise de la
-légende du calendrier tarifaire (`#f2efe6` / `#e7ddc9` / `#d2c3a2`) ; le prix est
-écrit sans le symbole, que la légende porte une fois. La plage choisie est un
-voile sombre translucide, pour qu'elle se lise par-dessus n'importe quelle
-saison. Un jour hors période n'affiche pas de
-prix (avant novembre 2026, après octobre 2027) et un séjour qui en contient un
+fiche totalise le séjour nuit par nuit. Chaque saison a sa teinte, très pâle
+(`#faf8f3` / `#f3ece0` / `#eae0ca`), rappelée par la légende. La plage choisie
+est un voile sombre translucide, pour qu'elle se lise par-dessus n'importe
+quelle saison.
+
+**Hors grille tarifaire, rien n'est réservable** : les jours qu'aucune période
+ne couvre sont désactivés, et le calendrier s'ouvre sur le premier mois tarifé
+plutôt que sur un mois vide. En octobre 2026, par exemple, le calendrier
+démarre directement sur novembre. Quand la grille 2027-2028 arrivera, il
+suffira d'ajouter ses périodes au JSON. Un séjour contenant une nuit sans tarif
 n'affiche pas de total — mieux vaut rien qu'un chiffre faux.
 
 `min_nuits` (5) est contrôlé à l'envoi. La règle « en haute saison, du samedi
