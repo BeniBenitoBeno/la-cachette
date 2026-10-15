@@ -102,7 +102,11 @@ taxes incluses), relevé case par case au pixel près :
 | 1 → 31 oct 2027 | moyenne | 1 100 € |
 
 Le calendrier affiche le prix sous chaque date, à la manière d'Airbnb, et la
-fiche totalise le séjour nuit par nuit. Un jour hors période n'affiche pas de
+fiche totalise le séjour nuit par nuit. Chaque saison a sa teinte, reprise de la
+légende du calendrier tarifaire (`#f2efe6` / `#e7ddc9` / `#d2c3a2`) ; le prix est
+écrit sans le symbole, que la légende porte une fois. La plage choisie est un
+voile sombre translucide, pour qu'elle se lise par-dessus n'importe quelle
+saison. Un jour hors période n'affiche pas de
 prix (avant novembre 2026, après octobre 2027) et un séjour qui en contient un
 n'affiche pas de total — mieux vaut rien qu'un chiffre faux.
 

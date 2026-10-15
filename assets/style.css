@@ -765,9 +765,15 @@ html{scroll-behavior:smooth}
 }
 .cal-case button{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px}
 .cal-case button small{
-  font-size:8.5px; letter-spacing:0; opacity:.55; font-variant-numeric:tabular-nums;
+  font-size:9.5px; letter-spacing:.02em; opacity:.62; font-variant-numeric:tabular-nums;
   white-space:nowrap;
 }
+
+/* les trois saisons : le casier porte la teinte, la plage choisie la recouvre */
+.cal-case.s-basse  {background:#f2efe6}
+.cal-case.s-moyenne{background:#e7ddc9}
+.cal-case.s-haute  {background:#d2c3a2}
+.cal-case.s-haute button small{opacity:.72}
 .cal-case.extremite button small{opacity:.8}
 .cal-case.pris button small{opacity:.3; text-decoration:none}
 .cal-case button:disabled{opacity:.22; cursor:default}
@@ -776,7 +782,7 @@ html{scroll-behavior:smooth}
 
 /* la plage : un fond posé sur la cellule, pour qu'il soit continu */
 .cal-case.dans::before{
-  content:""; position:absolute; inset:0; background:#e9e4d9;
+  content:""; position:absolute; inset:0; background:rgba(17,17,16,.11);
 }
 .cal-case.bord-gauche::before{left:14%}
 .cal-case.bord-droite::before{right:14%}
@@ -789,6 +795,19 @@ html{scroll-behavior:smooth}
 }
 .cal-case.pris button:not(:disabled):hover{background:repeating-linear-gradient(135deg,transparent 0 5px,#ebe6dc 5px 6px)}
 .cal-case.pris.dans::before{background:none}
+.cal-saisons{
+  list-style:none; margin:14px 0 0; padding:0;
+  display:flex; flex-wrap:wrap; gap:8px 22px; align-items:center;
+}
+.cal-saisons li{display:flex; align-items:center; gap:.6em; font-size:10px; letter-spacing:.14em}
+.cal-saisons i{
+  display:inline-block; width:16px; height:16px; border:1px solid rgba(17,17,16,.12);
+}
+.cal-saisons .s-basse   i{background:#f2efe6}
+.cal-saisons .s-moyenne i{background:#e7ddc9}
+.cal-saisons .s-haute   i{background:#d2c3a2}
+.cal-saisons b{font-weight:400; text-transform:uppercase; opacity:.75}
+.cal-saisons span{opacity:.5; font-variant-numeric:tabular-nums}
 .cal-tarifs-note{margin:10px 0 0; font-size:11px; line-height:1.7; opacity:.55}
 .cal-legende{display:flex; align-items:center; gap:.7em; margin:14px 0 0; font-size:10px; letter-spacing:.14em; text-transform:uppercase; opacity:.5}
 .cal-legende i{display:inline-block; width:14px; height:14px; background:repeating-linear-gradient(135deg,transparent 0 3px,#cfc9bc 3px 4px); border:1px solid #cfc9bc}

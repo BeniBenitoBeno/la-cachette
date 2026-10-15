@@ -27,14 +27,18 @@
   /* Tarifs par nuit, lus dans tarifs/<cle>.json. Chaque période couvre une
      saison ; un jour hors période n'a pas de prix affiché. */
   var tarifs = null;
-  function tarifDe(d) {
+  function periodeDe(d) {
     if (!tarifs) return null;
     var j = cle(d);
     for (var i = 0; i < tarifs.periodes.length; i++) {
       var p = tarifs.periodes[i];
-      if (j >= p.de && j <= p.a) return p.tarif;
+      if (j >= p.de && j <= p.a) return p;
     }
     return null;
+  }
+  function tarifDe(d) {
+    var p = periodeDe(d);
+    return p ? p.tarif : null;
   }
   function total() {
     var d1 = date(arrivee.value), d2 = date(depart.value);
@@ -49,6 +53,7 @@
   }
   var euros = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR',
                                                maximumFractionDigits: 0 });
+  var nombre = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 });
   function chargerTarifs() {
     if (!CLE || !window.fetch) return;
     fetch('tarifs/' + CLE + '.json', { cache: 'no-cache' })
@@ -59,6 +64,19 @@
         cal.classList.add('a-tarifs');          // cases plus hautes, prix visibles
         var note = document.getElementById('cal-tarifs-note');
         if (note && donnees.note) { note.textContent = donnees.note; note.hidden = false; }
+        var legende = document.getElementById('cal-saisons');
+        if (legende && donnees.saisons) {
+          legende.innerHTML = '';
+          ['basse', 'moyenne', 'haute'].forEach(function (nom) {
+            if (donnees.saisons[nom] === undefined) return;
+            var li = document.createElement('li');
+            li.className = 's-' + nom;
+            li.innerHTML = '<i aria-hidden="true"></i><b>' + nom + '</b><span>' +
+                           euros.format(donnees.saisons[nom]) + ' la nuit</span>';
+            legende.appendChild(li);
+          });
+          legende.hidden = false;
+        }
         construire();
         rafraichir();
       })
@@ -321,12 +339,14 @@
       bt.dataset.jour = cle(d);
       bt.setAttribute('aria-label', jourLong.format(d));
       bt.tabIndex = -1;
-      var prix = tarifDe(d);
-      if (prix !== null && d >= aujourdhui) {
+      var periode = periodeDe(d);
+      if (periode && d >= aujourdhui) {
+        casier.classList.add('s-' + periode.saison);
         var p = document.createElement('small');
-        p.textContent = euros.format(prix);
+        p.textContent = nombre.format(periode.tarif);        // sans € : la légende le dit
         bt.appendChild(p);
-        bt.setAttribute('aria-label', jourLong.format(d) + ' — ' + euros.format(prix) + ' la nuit');
+        bt.setAttribute('aria-label', jourLong.format(d) + ' — saison ' + periode.saison +
+                        ', ' + euros.format(periode.tarif) + ' la nuit');
       }
       if (d < aujourdhui) bt.disabled = true;
       if (nuitPrise(d)) {
