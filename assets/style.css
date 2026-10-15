@@ -443,6 +443,9 @@ html{scroll-behavior:smooth}
 .reserver .cal-mois{gap:clamp(18px,2.6vw,36px)}
 .reserver .cal-grille{max-width:330px; margin:0 auto}
 .reserver .cal-case button{aspect-ratio:auto; height:34px; min-height:0; font-size:12.5px}
+/* avec les tarifs, la case s'allonge pour loger le prix sous le chiffre */
+.reserver .a-tarifs .cal-case button{height:46px; line-height:1.15; padding-top:5px}
+.reserver .a-tarifs .cal-grille{max-width:356px}
 .reserver .cal-titres span{font-size:clamp(16px,1.6vw,19px)}
 .reserver .cal-tete{margin-bottom:14px}
 .reserver .cal-grille>b{padding-bottom:.7em}
@@ -760,6 +763,13 @@ html{scroll-behavior:smooth}
   cursor:pointer; padding:0; font-variant-numeric:tabular-nums;
   transition:background .25s var(--ease), color .25s var(--ease);
 }
+.cal-case button{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px}
+.cal-case button small{
+  font-size:8.5px; letter-spacing:0; opacity:.55; font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+.cal-case.extremite button small{opacity:.8}
+.cal-case.pris button small{opacity:.3; text-decoration:none}
 .cal-case button:disabled{opacity:.22; cursor:default}
 .cal-case button:not(:disabled):hover{background:#e9e4d9}
 .cal-case button:focus-visible{outline:2px solid var(--or); outline-offset:-2px}
@@ -779,6 +789,7 @@ html{scroll-behavior:smooth}
 }
 .cal-case.pris button:not(:disabled):hover{background:repeating-linear-gradient(135deg,transparent 0 5px,#ebe6dc 5px 6px)}
 .cal-case.pris.dans::before{background:none}
+.cal-tarifs-note{margin:10px 0 0; font-size:11px; line-height:1.7; opacity:.55}
 .cal-legende{display:flex; align-items:center; gap:.7em; margin:14px 0 0; font-size:10px; letter-spacing:.14em; text-transform:uppercase; opacity:.5}
 .cal-legende i{display:inline-block; width:14px; height:14px; background:repeating-linear-gradient(135deg,transparent 0 3px,#cfc9bc 3px 4px); border:1px solid #cfc9bc}
 .cal-case.aujourdhui button::after{

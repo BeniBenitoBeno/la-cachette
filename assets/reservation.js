@@ -24,6 +24,47 @@
     }
     return true;
   }
+  /* Tarifs par nuit, lus dans tarifs/<cle>.json. Chaque période couvre une
+     saison ; un jour hors période n'a pas de prix affiché. */
+  var tarifs = null;
+  function tarifDe(d) {
+    if (!tarifs) return null;
+    var j = cle(d);
+    for (var i = 0; i < tarifs.periodes.length; i++) {
+      var p = tarifs.periodes[i];
+      if (j >= p.de && j <= p.a) return p.tarif;
+    }
+    return null;
+  }
+  function total() {
+    var d1 = date(arrivee.value), d2 = date(depart.value);
+    if (!d1 || !d2) return null;
+    var somme = 0;
+    for (var x = new Date(d1); x < d2; x.setDate(x.getDate() + 1)) {
+      var t = tarifDe(x);
+      if (t === null) return null;           // une nuit sans tarif : pas de total
+      somme += t;
+    }
+    return somme;
+  }
+  var euros = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR',
+                                               maximumFractionDigits: 0 });
+  function chargerTarifs() {
+    if (!CLE || !window.fetch) return;
+    fetch('tarifs/' + CLE + '.json', { cache: 'no-cache' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (donnees) {
+        if (!donnees || !donnees.periodes) return;
+        tarifs = donnees;
+        cal.classList.add('a-tarifs');          // cases plus hautes, prix visibles
+        var note = document.getElementById('cal-tarifs-note');
+        if (note && donnees.note) { note.textContent = donnees.note; note.hidden = false; }
+        construire();
+        rafraichir();
+      })
+      .catch(function () { /* pas de fichier : calendrier sans prix */ });
+  }
+
   function chargerDisponibilites() {
     if (!CLE || !window.fetch) return;
     fetch('disponibilites/' + CLE + '.json', { cache: 'no-cache' })
@@ -100,7 +141,13 @@
     document.getElementById('fiche-voyageurs').textContent = voyageurs();
 
     var n = nuits();
+    var somme = total();
     document.getElementById('fiche-nuits').textContent = n > 0 ? accord(n, 'nuit') : '';
+    var ligne = document.getElementById('fiche-total');
+    if (ligne) {
+      ligne.hidden = !(n > 0 && somme !== null);
+      if (!ligne.hidden) ligne.querySelector('dd').textContent = euros.format(somme);
+    }
   }
 
   /* ------------------------------------------------------------ contrôles */
@@ -110,6 +157,9 @@
     if (!depart.value) manques.push('la date de départ');
     if (arrivee.value && depart.value && nuits() < 1) {
       manques.push('un départ postérieur à l’arrivée');
+    }
+    if (tarifs && tarifs.min_nuits && nuits() > 0 && nuits() < tarifs.min_nuits) {
+      manques.push('un séjour d’au moins ' + accord(tarifs.min_nuits, 'nuit'));
     }
     if (!document.getElementById('nom').value.trim()) manques.push('votre nom');
     var courriel = document.getElementById('courriel');
@@ -133,6 +183,10 @@
       'Nom         : ' + d.get('nom'),
       'Courriel    : ' + d.get('courriel')
     ];
+    var somme = total();
+    if (somme !== null) {
+      lignes.splice(5, 0, 'Montant     : ' + euros.format(somme) + '  (taxes incluses)');
+    }
     if (d.get('telephone').trim()) lignes.push('Téléphone   : ' + d.get('telephone'));
     if (d.get('message').trim()) lignes.push('', d.get('message').trim());
     return lignes.join('\n');
@@ -263,10 +317,17 @@
       casier.dataset.jour = cle(d);
       var bt = document.createElement('button');
       bt.type = 'button';
-      bt.textContent = n;
+      bt.appendChild(document.createTextNode(n));
       bt.dataset.jour = cle(d);
       bt.setAttribute('aria-label', jourLong.format(d));
       bt.tabIndex = -1;
+      var prix = tarifDe(d);
+      if (prix !== null && d >= aujourdhui) {
+        var p = document.createElement('small');
+        p.textContent = euros.format(prix);
+        bt.appendChild(p);
+        bt.setAttribute('aria-label', jourLong.format(d) + ' — ' + euros.format(prix) + ' la nuit');
+      }
       if (d < aujourdhui) bt.disabled = true;
       if (nuitPrise(d)) {
         casier.classList.add('pris');
@@ -436,5 +497,6 @@
   compteurs();
   construire();
   chargerDisponibilites();
+  chargerTarifs();
   rafraichir();
 })();

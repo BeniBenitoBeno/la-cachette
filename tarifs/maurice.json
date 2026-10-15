@@ -1,0 +1,43 @@
+{
+ "source": "Calendrier tarifaire 2026-2027 — tarifs par nuit, taxes incluses",
+ "devise": "EUR",
+ "min_nuits": 5,
+ "note": "Séjour minimum 5 nuits. En haute saison, la villa est proposée exclusivement du samedi au samedi.",
+ "saisons": {
+  "basse": 850,
+  "moyenne": 1100,
+  "haute": 1750
+ },
+ "periodes": [
+  {
+   "de": "2026-11-01",
+   "a": "2026-12-18",
+   "saison": "moyenne",
+   "tarif": 1100
+  },
+  {
+   "de": "2026-12-19",
+   "a": "2027-01-02",
+   "saison": "haute",
+   "tarif": 1750
+  },
+  {
+   "de": "2027-01-03",
+   "a": "2027-04-30",
+   "saison": "moyenne",
+   "tarif": 1100
+  },
+  {
+   "de": "2027-05-01",
+   "a": "2027-09-30",
+   "saison": "basse",
+   "tarif": 850
+  },
+  {
+   "de": "2027-10-01",
+   "a": "2027-10-31",
+   "saison": "moyenne",
+   "tarif": 1100
+  }
+ ]
+}

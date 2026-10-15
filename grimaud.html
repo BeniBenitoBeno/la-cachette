@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=1791748431">
+<link rel="stylesheet" href="assets/style.css?v=1792078081">
 </head>
 <body>
 
@@ -359,6 +359,7 @@
             <button type="button" class="cal-effacer" id="cal-effacer" hidden>Effacer les dates</button>
           </div>
           <p class="cal-legende"><i aria-hidden="true"></i>Déjà réservé</p>
+          <p class="cal-tarifs-note" id="cal-tarifs-note" hidden></p>
         </div>
         <input type="hidden" name="arrivee" id="arrivee">
         <input type="hidden" name="depart" id="depart">
@@ -420,6 +421,7 @@
         <div><dt>Arrivée</dt><dd class="attente" id="fiche-arrivee">à choisir</dd></div>
         <div><dt>Départ</dt><dd class="attente" id="fiche-depart">à choisir</dd></div>
         <div><dt>Voyageurs</dt><dd id="fiche-voyageurs">2 adultes</dd></div>
+        <div id="fiche-total" hidden><dt>Montant</dt><dd></dd></div>
       </dl>
       <p class="fiche__nuits" id="fiche-nuits" aria-live="polite"></p>
       <p class="fiche__note">Une demande n'est pas une réservation. Nous revenons
@@ -495,10 +497,10 @@
 })();
 </script>
 
-<script src="assets/hero.js?v=1791748431"></script>
-<script src="assets/sommaire.js?v=1791748431"></script>
-<script src="assets/config.js?v=1791748431"></script>
-<script src="assets/reservation.js?v=1791748431"></script>
+<script src="assets/hero.js?v=1792078081"></script>
+<script src="assets/sommaire.js?v=1792078081"></script>
+<script src="assets/config.js?v=1792078081"></script>
+<script src="assets/reservation.js?v=1792078081"></script>
 
 </body>
 </html>

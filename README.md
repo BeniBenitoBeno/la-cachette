@@ -87,6 +87,34 @@ grand écran, les photos sont donc agrandies d'un facteur 1,3 à 1,8.
 Pour un rendu net sur grand écran, il faudrait les fichiers d'origine du
 photographe en 2 400 px ou plus.
 
+## Les tarifs par nuit
+
+`tarifs/<maison>.json` porte les périodes de saison et le prix de la nuit.
+Pour Île Maurice il vient du *Calendrier tarifaire 2026-2027* (tarifs par nuit,
+taxes incluses), relevé case par case au pixel près :
+
+| Période | Saison | Prix |
+|---|---|---|
+| 1 nov → 18 déc 2026 | moyenne | 1 100 € |
+| 19 déc 2026 → 2 janv 2027 | haute | 1 750 € |
+| 3 janv → 30 avr 2027 | moyenne | 1 100 € |
+| 1 mai → 30 sept 2027 | basse | 850 € |
+| 1 → 31 oct 2027 | moyenne | 1 100 € |
+
+Le calendrier affiche le prix sous chaque date, à la manière d'Airbnb, et la
+fiche totalise le séjour nuit par nuit. Un jour hors période n'affiche pas de
+prix (avant novembre 2026, après octobre 2027) et un séjour qui en contient un
+n'affiche pas de total — mieux vaut rien qu'un chiffre faux.
+
+`min_nuits` (5) est contrôlé à l'envoi. La règle « en haute saison, du samedi
+au samedi » est seulement **affichée**, pas imposée : elle ne bloque pas le
+choix des dates.
+
+Pour une nouvelle grille tarifaire : mettre à jour le JSON à la main, ou
+réutiliser la lecture du PDF — elle repère les titres de mois, attribue chaque
+chiffre à son mois par colonne et rangée, puis lit la couleur de fond dominante
+de chaque case et la rapproche des trois pastilles de la légende.
+
 ## Les dates prises sur les plateformes (iCal)
 
 Chaque annonce Airbnb / Booking / Abritel exporte un lien `.ics`. On les
