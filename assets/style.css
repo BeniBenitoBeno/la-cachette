@@ -770,11 +770,11 @@ html{scroll-behavior:smooth}
 }
 
 /* les trois saisons : le casier porte la teinte, la plage choisie la recouvre */
-/* une seule teinte — l'or pâle de la marque — à trois opacités.
-   Pour appuyer ou alléger les saisons, ne toucher qu'à ces trois nombres. */
-.cal-case.s-basse  {background:rgba(185,163,126,.04)}
-.cal-case.s-moyenne{background:rgba(185,163,126,.09)}
-.cal-case.s-haute  {background:rgba(185,163,126,.17)}
+/* les trois teintes du calendrier tarifaire, rendues un peu transparentes.
+   Pour appuyer ou alléger les saisons, ne toucher qu'à l'opacité finale. */
+.cal-case.s-basse  {background:rgba(242,239,230,.65)}   /* #f2efe6 */
+.cal-case.s-moyenne{background:rgba(231,221,201,.65)}   /* #e7ddc9 */
+.cal-case.s-haute  {background:rgba(210,195,162,.65)}   /* #d2c3a2 */
 .cal-case.s-haute button small{opacity:.7}
 /* hors grille tarifaire : fermé, sans teinte ni prix */
 .cal-case.hors-grille button{opacity:.2}
@@ -807,9 +807,9 @@ html{scroll-behavior:smooth}
 .cal-saisons i{
   display:inline-block; width:16px; height:16px; border:1px solid rgba(17,17,16,.12);
 }
-.cal-saisons .s-basse   i{background:rgba(185,163,126,.04)}
-.cal-saisons .s-moyenne i{background:rgba(185,163,126,.09)}
-.cal-saisons .s-haute   i{background:rgba(185,163,126,.17)}
+.cal-saisons .s-basse   i{background:rgba(242,239,230,.65)}
+.cal-saisons .s-moyenne i{background:rgba(231,221,201,.65)}
+.cal-saisons .s-haute   i{background:rgba(210,195,162,.65)}
 .cal-saisons b{font-weight:400; text-transform:uppercase; opacity:.75}
 .cal-saisons span{opacity:.5; font-variant-numeric:tabular-nums}
 .cal-tarifs-note{margin:10px 0 0; font-size:11px; line-height:1.7; opacity:.55}

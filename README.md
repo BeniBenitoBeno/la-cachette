@@ -102,9 +102,10 @@ taxes incluses), relevé case par case au pixel près :
 | 1 → 31 oct 2027 | moyenne | 1 100 € |
 
 Le calendrier affiche le prix sous chaque date, à la manière d'Airbnb, et la
-fiche totalise le séjour nuit par nuit. Chaque saison a sa teinte : l'or pâle de
-la marque à trois opacités (`.04` / `.09` / `.17`), rappelées par la légende —
-pour appuyer ou alléger les saisons, ces trois nombres suffisent. La plage choisie
+fiche totalise le séjour nuit par nuit. Chaque saison a sa teinte, reprise du
+calendrier tarifaire (`#f2efe6` / `#e7ddc9` / `#d2c3a2`) et posée à 65 %
+d'opacité — pour appuyer ou alléger les saisons, c'est ce seul nombre qui
+compte. La plage choisie
 est un voile sombre translucide, pour qu'elle se lise par-dessus n'importe
 quelle saison.
 
